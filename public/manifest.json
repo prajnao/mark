@@ -2,10 +2,10 @@
   "name": "Mark",
   "description": "Mark is a simple, intuitive way to read markdown files in your browser",
   "version": "1.0.0",
-  "manifest_version": "3",
+  "manifest_version": 3,
   "content_scripts": [
     {
-      "js": ["content/index.ts"],
+      "js": ["content/index.js"],
       "matches": ["file:///*.md"],
       "run_at":"document_start"
     }
