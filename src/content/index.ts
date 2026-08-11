@@ -1,4 +1,18 @@
-console.log("My Markdown preview extension is running!");
+import { purifyHtml, removeFrontMatter } from "../core/clean";
+import { renderMarkdown } from "../core/parser";
+import { getHeadings } from "../ui/toc";
+import { styles } from "../styles/style";
+import { applyStoredCollapse, buildSidebar, buildToggle, trackActiveHeading } from "../ui/sidebar";
+
+console.log("My Markdown preview extension is running, gg!");
+
+
+
+function addStyles(): void {
+  const style = document.createElement("style");
+  style.textContent = styles;
+  document.head.appendChild(style);
+}
 
 let hideStyle: HTMLStyleElement | null = null;
 
@@ -33,42 +47,31 @@ function getRawText(): string {
   return text.replace(/^\uFEFF/, "");
 }
 
-function buildView(text: string): void {
+function buildView(html: string): HTMLElement {
   document.body.innerHTML = "";
+
+  const shell = document.createElement("div");
+  shell.id = "mark-shell";
+
+  const main = document.createElement("div");
+  main.id = "mark-main";
 
   const root = document.createElement("div");
   root.id = "mark-root";
 
-  const content = document.createElement("pre");
-  content.id = "mark-viewer-content";
-  content.textContent = text;
+  const content = document.createElement("div");
+  content.id = "mark-content";
+  content.innerHTML = html;
 
   root.appendChild(content);
-  document.body.appendChild(root);
+  main.appendChild(root);
+  shell.appendChild(main);
+  document.body.appendChild(shell);
+
+  return content;
 }
 
-function addStyles(): void {
-    const style = document.createElement("style");
-    style.textContent = `
-      #mark-viewer-root {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 64px 24px;
-        font-family: ui-sans-serif, system-ui, sans-serif;
-        font-size: 16px;
-        line-height: 1.7;
-        color: #1a1a1a;
-      }
-      #mark-viewer-content {
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-family: inherit;
-        margin: 0;
-         background-color: lightblue;
-      }
-    `;
-    document.head.appendChild(style);
-  }
+
 
 function main(): void {
     hideBody();
@@ -77,10 +80,23 @@ function main(): void {
     onReady(() => {
       try {
         const text = getRawText();
-        const documentTitle=getFileName();
-        console.log(documentTitle);
+        const markdown = removeFrontMatter(text);
+        const html = purifyHtml(renderMarkdown(markdown));
+    
+        document.title = getFileName();
         addStyles();
-        buildView(text);
+    
+        const content = buildView(html);
+        const headings = getHeadings(content);
+    
+        if (headings.length > 0) {
+          const shell = document.getElementById("mark-shell")!;
+          shell.insertBefore(buildSidebar(headings), shell.firstChild);
+          document.body.appendChild(buildToggle());
+          trackActiveHeading(headings);
+        }
+    
+        void applyStoredCollapse();
       } catch (error) {
         console.error("[md-viewer]", error);
       } finally {
@@ -97,3 +113,12 @@ function main(): void {
     const fileName=path.split("/").pop() ?? "Document";
     return fileName;
   }
+
+
+
+
+
+
+
+
+
