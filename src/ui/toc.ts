@@ -6,7 +6,7 @@ export interface TocItem {
   
   export function getHeadings(root: HTMLElement): TocItem[] {
     const nodes = root.querySelectorAll<HTMLHeadingElement>(
-      "h1, h2, h3, h4, h5, h6"
+      "h1, h2, h3, h4"
     );
   
     return Array.from(nodes).map((node) => ({

@@ -7,7 +7,7 @@
 <p>This is text</p>
 This is text
 
-<a>Hyper link</a>
+<a href="https://prajnaprabhu.com">Hyper link</a>
 <strong>strong</strong>
 
 <hr/>
@@ -56,3 +56,40 @@ Hello, the pre tag
 | --- | --- | --- |
 | Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
 | Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+
+
+ <!-- task  -->
+ - [ ] hi, this is open task
+ - [x] completed task
+
+
+ <!-- Mermaid syntax  -->
+ pie title NETFLIX
+         "Time spent looking for movie" : 90
+         "Time spent watching it" : 10
+
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you?
+    Bob-->>John: How about you John?
+    Bob--x Alice: I am good thanks!
+    Bob-x John: I am good thanks!
+    Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+    Bob-->Alice: Checking with John...
+    Alice->John: Yes... John, how are you?
+
+
+
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+
+
+
+
+<!-- math  -->
+```math
+a + b = c
+```

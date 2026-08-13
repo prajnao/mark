@@ -40,7 +40,7 @@ export function buildSidebar(items: TocItem[]): HTMLElement {
     bar.title = item.text;
     bar.setAttribute("aria-label", item.text);
     bar.style.setProperty("--depth", depth);
-    bar.addEventListener("click", () => scrollToHeading(item.id));
+    // bar.addEventListener("click", () => scrollToHeading(item.id));
     rail.appendChild(bar);
 
     const link = document.createElement("a");

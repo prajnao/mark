@@ -1,6 +1,7 @@
 export const styles = `
   :root {
     --bg: #ffffff;
+    --bg-hover:rgb(240, 240, 240);
     --fg: #1a1a1a;
     --fg-muted: #6b7280;
     --border: #e5e7eb;
@@ -11,6 +12,7 @@ export const styles = `
     --selection: #dbeafe;
     --sidebar-w: 260px;
     --sidebar-bg: #fafafa;
+    --primary:  #ff869c;
 
     --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -23,26 +25,27 @@ export const styles = `
   --panel-bg: #ffffff;
   --rail-w: 24px;
   --panel-w: 260px;
-  --bar-max: 14px;
+  --bar-max: 12px;
   --bar-step: 3px;
   --bar-min: 6px;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0d1117;
+      --bg: #191919;
+      --bg-hover:rgb(41, 41, 41);
       --fg: #e6edf3;
-      --fg-muted: #8b949e;
-      --border: #30363d;
+      --fg-muted:rgb(159, 159, 159);
+      --border: rgb(64, 64, 64);
       --link: #58a6ff;
-      --code-bg: #161b22;
+      --code-bg: #202020;
       --code-fg: #e6edf3;
       --quote-border: #3d444d;
       --selection: #1f3a5f;
       --sidebar-bg: #0d1117;
-      --bar-color: #3f3f46;
+      --bar-color:rgb(84, 84, 91);
       --rail-hover-bg: #202020;
-      --panel-bg: #161b22;
+      --panel-bg: #191919;
     }
   }
 
@@ -143,7 +146,8 @@ export const styles = `
     background: var(--code-bg);
     color: var(--code-fg);
     padding: 0.15em 0.4em;
-    border-radius: 4px;
+    // border-radius: 4px;
+    border:none;
   }
 
   #mark-content pre {
@@ -154,6 +158,7 @@ export const styles = `
     margin: 1.5em 0;
     overflow-x: auto;
     line-height: 1.55;
+     border:none;
   }
 
   #mark-content pre code {
@@ -161,6 +166,7 @@ export const styles = `
     padding: 0;
     border-radius: 0;
     font-size: 0.85em;
+     border:none;
   }
 
   /* Table */
@@ -224,23 +230,25 @@ export const styles = `
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding:10px 5px;
-    border-radius:10px;
+    padding:12px 2px;
+    border-radius:8px;
     align-items:center;
+        cursor:pointer;
+        transition:background-color 180ms ease-out;
   }
 
   #mark-toc-rail:hover{
   background: var(--rail-hover-bg);
+  transform:background-color;
   }
 
   .mark-toc-bar {
     all: unset;
     box-sizing: border-box;
-    display: blocl;
+    display: block;
     height: 1.8px;
     border-radius: 1px;
     background: var(--bar-color);
-    cursor: pointer;
     width: max(
       var(--bar-min),
       calc(var(--bar-max) - var(--depth) * var(--bar-step))
@@ -250,7 +258,8 @@ export const styles = `
   }
 
   .mark-toc-bar.is-active {
-    background: var(--fg);
+    // background: var(--fg);
+    background:var(--primary);
   }
 
   /* Panel */
@@ -265,6 +274,13 @@ export const styles = `
     border: 1px solid var(--border);
     border-radius: 12px;
     scrollbar-width: thin;
+    
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition:
+      opacity 180ms ease,
+      transform 220ms cubic-bezier(0.32, 0.72, 0, 1),
+      visibility 0s;
   }
 
   #mark-sidebar-title {
@@ -294,18 +310,24 @@ export const styles = `
     transition: color 120ms ease, background 120ms ease;
   }
 
-  .mark-toc-link:hover {
-    color: var(--fg);
-    background: var(--code-bg);
-  }
-
   .mark-toc-link.is-active {
-    color: var(--fg);
+    // color: var(--fg);
+    color:var(--primary);
     font-weight: 550;
   }
 
-  body.sidebar-collapsed #mark-toc-panel {
-    display: none;
+//   body.sidebar-collapsed #mark-toc-panel {
+//     display: none;
+//   }
+body.sidebar-collapsed #mark-toc-panel {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.98);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 140ms ease,
+      transform 180ms ease,
+      visibility 0s 180ms;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -321,41 +343,10 @@ export const styles = `
     flex-direction: column;
   }
 
-  .mark-toc-link {
-    display: block;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--fg-muted);
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .mark-toc-link:hover {
-    color: var(--fg);
-    background: var(--code-bg);
-  }
-
-  #mark-toggle {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 10;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    color: var(--fg-muted);
-    font-size: 14px;
-    cursor: pointer;
+    // color: var(--fg);
+    color:var(--primary);
+    background: var(--bg-hover);
   }
 
   #mark-toggle:hover {
