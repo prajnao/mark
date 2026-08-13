@@ -16,6 +16,16 @@ export const styles = `
     --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
     --measure: 68ch;
+
+  
+   --bar-color:rgb(180, 180, 180);
+   --rail-hover-bg:#f0f0f0;
+  --panel-bg: #ffffff;
+  --rail-w: 24px;
+  --panel-w: 260px;
+  --bar-max: 14px;
+  --bar-step: 3px;
+  --bar-min: 6px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -30,6 +40,9 @@ export const styles = `
       --quote-border: #3d444d;
       --selection: #1f3a5f;
       --sidebar-bg: #0d1117;
+      --bar-color: #3f3f46;
+      --rail-hover-bg: #202020;
+      --panel-bg: #161b22;
     }
   }
 
@@ -46,7 +59,6 @@ export const styles = `
   #mark-root {
     max-width: var(--measure);
     margin: 0 auto;
-    // padding: 72px 24px 160px;
     padding: 20px 0px;
     font-family: var(--font-body);
     font-size: 16px;
@@ -66,16 +78,11 @@ export const styles = `
     line-height: 1.25;
     font-weight: 650;
     letter-spacing: -0.015em;
-    // margin: 2em 0 0.6em;
     scroll-margin-top: 24px;
   }
 
-  #mark-content > :first-child {
-    margin-top: 0;
-  }
-
-  #mark-content h1 { font-size: 2.05em; letter-spacing: -0.025em; }
-  #mark-content h2 { font-size: 1.5em; }
+  #mark-content h1 { font-size: 30px; letter-spacing: -0.025em; }
+  #mark-content h2 { font-size: 24px; }
   #mark-content h3 { font-size: 1.2em; }
   #mark-content h4 { font-size: 1em; }
   #mark-content h5,
@@ -190,28 +197,124 @@ export const styles = `
     align-items: flex-start;
   }
 
-  #mark-sidebar {
-    position: sticky;
-    top: 0;
-    flex: 0 0 var(--sidebar-w);
-    width: var(--sidebar-w);
-    height: 100vh;
-    overflow-y: auto;
-    padding: 24px 8px 40px;
+  #mark-toc-pill {
+    position:fixed;
+    height:fit-content;
+}
+
+
+#mark-sidebar {
+    position: fixed;
+    // top: 10%;
+    height:100vh;
+    // flex: 0 0 calcx(var(--rail-w) + var(--panel-w) + 20px);
+    // max-height: 80vh;
+    // overflow-y: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
     box-sizing: border-box;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
     font-family: var(--font-body);
+  }
+
+  /* Rail */
+  #mark-toc-rail {
+    flex: 0 0 var(--rail-w);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding:10px 5px;
+    border-radius:10px;
+    align-items:center;
+  }
+
+  #mark-toc-rail:hover{
+  background: var(--rail-hover-bg);
+  }
+
+  .mark-toc-bar {
+    all: unset;
+    box-sizing: border-box;
+    display: blocl;
+    height: 1.8px;
+    border-radius: 1px;
+    background: var(--bar-color);
+    cursor: pointer;
+    width: max(
+      var(--bar-min),
+      calc(var(--bar-max) - var(--depth) * var(--bar-step))
+    );
+    opacity: calc(1 - var(--depth) * 0.15);
+    transition: background 120ms ease, opacity 120ms ease;
+  }
+
+  .mark-toc-bar.is-active {
+    background: var(--fg);
+  }
+
+  /* Panel */
+
+  #mark-toc-panel {
+    flex: 0 0 var(--panel-w);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 14px 8px;
+    box-sizing: border-box;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     scrollbar-width: thin;
   }
 
   #mark-sidebar-title {
-    padding: 0 12px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--fg);
-    word-break: break-word;
+    padding: 0 10px 10px;
+    font-size: 10px;
+    // letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
   }
+
+  #mark-toc {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mark-toc-link {
+    display: block;
+    padding: 5px 10px 5px calc(10px + var(--depth) * 14px);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--fg-muted);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 120ms ease, background 120ms ease;
+  }
+
+  .mark-toc-link:hover {
+    color: var(--fg);
+    background: var(--code-bg);
+  }
+
+  .mark-toc-link.is-active {
+    color: var(--fg);
+    font-weight: 550;
+  }
+
+  body.sidebar-collapsed #mark-toc-panel {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mark-toc-bar,
+    .mark-toc-link {
+      transition: none;
+    }
+  }
+
 
   #mark-toc {
     display: flex;
@@ -237,12 +340,6 @@ export const styles = `
     background: var(--code-bg);
   }
 
-  .mark-toc-link.is-active {
-    color: var(--fg);
-    border-left-color: var(--link);
-    font-weight: 550;
-  }
-
   #mark-toggle {
     position: fixed;
     top: 12px;
@@ -263,10 +360,6 @@ export const styles = `
 
   #mark-toggle:hover {
     color: var(--fg);
-  }
-
-  body.sidebar-collapsed #mark-sidebar {
-    display: none;
   }
 
   #mark-main {

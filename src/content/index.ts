@@ -1,8 +1,8 @@
 import { purifyHtml, removeFrontMatter } from "../core/clean";
 import { renderMarkdown } from "../core/parser";
 import { getHeadings } from "../ui/toc";
-import { styles } from "../styles/style";
-import { applyStoredCollapse, buildSidebar, buildToggle, trackActiveHeading } from "../ui/sidebar";
+import { styles } from "../styles/style.ts";
+import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sidebar";
 
 console.log("My Markdown preview extension is running, gg!");
 
@@ -92,7 +92,7 @@ function main(): void {
         if (headings.length > 0) {
           const shell = document.getElementById("mark-shell")!;
           shell.insertBefore(buildSidebar(headings), shell.firstChild);
-          document.body.appendChild(buildToggle());
+          // document.body.appendChild(buildToggle());
           trackActiveHeading(headings);
         }
     
