@@ -1,7 +1,8 @@
 import { purifyHtml, removeFrontMatter } from "../core/clean";
 import { renderMarkdown } from "../core/parser";
 import { getHeadings } from "../ui/toc";
-import { styles } from "../styles/style.ts";
+// import { styles } from "../styles/style.ts";
+import styles from "../styles/style.css?inline";
 import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sidebar";
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
 
