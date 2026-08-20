@@ -1,8 +1,10 @@
 import { purifyHtml, removeFrontMatter } from "../core/clean";
 import { renderMarkdown } from "../core/parser";
 import { getHeadings } from "../ui/toc";
-import { styles } from "../styles/style.ts";
+// import { styles } from "../styles/style.ts";
+import styles from "../styles/style.css?inline";
 import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sidebar";
+import { enhanceCodeBlocks } from "../ui/code-block.ts";
 
 console.log("My Markdown preview extension is running, gg!");
 
@@ -81,12 +83,18 @@ function main(): void {
       try {
         const text = getRawText();
         const markdown = removeFrontMatter(text);
-        const html = purifyHtml(renderMarkdown(markdown));
+        const rendered = renderMarkdown(markdown);
+        console.log("PARSED:", rendered.slice(0, 600));
+        const html = purifyHtml(rendered);
+        console.log("PURIFIED:", html.slice(0, 600));
+
+        
     
         document.title = getFileName();
         addStyles();
     
         const content = buildView(html);
+        enhanceCodeBlocks(content);
         const headings = getHeadings(content);
     
         if (headings.length > 0) {
@@ -103,6 +111,8 @@ function main(): void {
         reveal();
       }
     });
+
+    
   }
   
   main();

@@ -1,12 +1,12 @@
-export const styles = `
-  :root {
+:root {
     --bg: #ffffff;
-    --bg-hover:rgb(240, 240, 240);
+    /* --bg-hover:rgb(240, 240, 240); */
+    --bg-hover:#f2f2f2;
     --fg: #1a1a1a;
     --fg-muted: #6b7280;
     --border: #e5e7eb;
-    --link: #2563eb;
-    --code-bg: #f6f8fa;
+    --link: #1c3771;
+    --code-bg: #F9F8F7;
     --code-fg: #24292f;
     --quote-border: #d1d5db;
     --selection: #dbeafe;
@@ -85,25 +85,27 @@ export const styles = `
 
   .mark-code {
     margin: 1.5em 0;
-    border: 1px solid var(--border);
+    /* border: 1px solid var(--border); */
     border-radius: 10px;
     overflow: hidden;
     background: var(--code-bg);
+    /* padding:6px 14px; */
+    padding:10px 14px;
   }
 
   .mark-code-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 10px 6px 14px;
-    background: var(--code-header-bg);
-    border-bottom: 1px solid var(--border);
-    min-height: 30px;
+    padding-bottom:6px;
+    /* background: var(--code-header-bg); */
+    /* border-bottom: 1px solid var(--border); */
+    min-height: 20px;
   }
 
   .mark-code-lang {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--fg-muted);
     user-select: none;
   }
@@ -134,7 +136,6 @@ export const styles = `
 
   .mark-code-copy.is-done {
     opacity: 1;
-    color: #3fb950;
   }
 
   .mark-code pre {
@@ -142,7 +143,7 @@ export const styles = `
     border: none;
     border-radius: 0;
     background: none;
-    padding: 14px;
+    /* padding:2px 14px; */
     font-size:14px;
     overflow-x: auto;
   }
@@ -214,19 +215,20 @@ export const styles = `
     line-height: 1.25;
     font-weight: 650;
     letter-spacing: -0.015em;
-    scroll-margin-top: 24px;
+    /* scroll-margin-top: 24px; */
   }
 
   #mark-content h1 { font-size: 30px; letter-spacing: -0.025em; }
   #mark-content h2 { font-size: 24px; }
-  #mark-content h3 { font-size: 1.2em; }
-  #mark-content h4 { font-size: 1em; }
+  #mark-content h3 { font-size: 20px; }
+  #mark-content h4 { font-size: 18px; }
   #mark-content h5,
-  #mark-content h6 { font-size: 0.9em; color: var(--fg-muted); }
+  #mark-content h6 { font-size: 16px; color: var(--fg-muted); }
 
   /* Text */
   #mark-content p {
-    margin: 0 0 1.2em;
+    /* margin: 0 0 16px; */
+    font-size: 16px;
   }
 
   #mark-content a {
@@ -241,7 +243,7 @@ export const styles = `
   #mark-content hr {
     border: 0;
     border-top: 1px solid var(--border);
-    margin: 2.5em 0;
+    margin: 20px 0;
   }
 
   /* Lists */
@@ -279,7 +281,8 @@ export const styles = `
     width: 100%;
     border-collapse: collapse;
     margin: 1.5em 0;
-    font-size: 0.94em;
+    /* font-size: 0.94em; */
+    font-size:14px;
   }
 
   #mark-content th,
@@ -316,11 +319,7 @@ export const styles = `
 
 #mark-sidebar {
     position: fixed;
-    // top: 10%;
     height:100vh;
-    // flex: 0 0 calcx(var(--rail-w) + var(--panel-w) + 20px);
-    // max-height: 80vh;
-    // overflow-y: auto;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -351,7 +350,7 @@ export const styles = `
     all: unset;
     box-sizing: border-box;
     display: block;
-    height: 1.8px;
+    height: 1.4px;
     border-radius: 1px;
     background: var(--bar-color);
     width: max(
@@ -363,8 +362,8 @@ export const styles = `
   }
 
   .mark-toc-bar.is-active {
-    // background: var(--fg);
     background:var(--primary);
+    height:2px;
   }
 
   /* Panel */
@@ -391,9 +390,9 @@ export const styles = `
   #mark-sidebar-title {
     padding: 0 10px 10px;
     font-size: 10px;
-    // letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--fg-muted);
+    display:none;
   }
 
   #mark-toc {
@@ -416,14 +415,10 @@ export const styles = `
   }
 
   .mark-toc-link.is-active {
-    // color: var(--fg);
     color:var(--primary);
     font-weight: 550;
   }
 
-//   body.sidebar-collapsed #mark-toc-panel {
-//     display: none;
-//   }
 body.sidebar-collapsed #mark-toc-panel {
     opacity: 0;
     transform: translateX(-8px) scale(0.98);
@@ -449,7 +444,6 @@ body.sidebar-collapsed #mark-toc-panel {
   }
 
   .mark-toc-link:hover {
-    // color: var(--fg);
     color:var(--primary);
     background: var(--bg-hover);
   }
@@ -462,4 +456,3 @@ body.sidebar-collapsed #mark-toc-panel {
     flex: 1;
     min-width: 0;
   }
-`;
