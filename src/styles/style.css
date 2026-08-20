@@ -90,7 +90,7 @@
     overflow: hidden;
     background: var(--code-bg);
     /* padding:6px 14px; */
-    padding:10px 14px;
+    padding:12px 14px;
   }
 
   .mark-code-header {
@@ -105,7 +105,7 @@
 
   .mark-code-lang {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--fg-muted);
     user-select: none;
   }
@@ -144,7 +144,7 @@
     border-radius: 0;
     background: none;
     /* padding:2px 14px; */
-    font-size:14px;
+    font-size:13px;
     overflow-x: auto;
   }
 
@@ -243,7 +243,7 @@
   #mark-content hr {
     border: 0;
     border-top: 1px solid var(--border);
-    margin: 20px 0;
+    margin: 24px 0;
   }
 
   /* Lists */
@@ -363,6 +363,7 @@
 
   .mark-toc-bar.is-active {
     background:var(--primary);
+    /* background:var(--fg); */
     height:2px;
   }
 
@@ -416,6 +417,7 @@
 
   .mark-toc-link.is-active {
     color:var(--primary);
+    /* color:var(--fg); */
     font-weight: 550;
   }
 
@@ -445,6 +447,7 @@ body.sidebar-collapsed #mark-toc-panel {
 
   .mark-toc-link:hover {
     color:var(--primary);
+    /* color:var(--fg); */
     background: var(--bg-hover);
   }
 
