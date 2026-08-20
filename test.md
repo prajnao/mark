@@ -34,7 +34,7 @@ This is text
 
 
 <!-- code  -->
-```
+```ts
 export default function Prajna(){
     return(
         <div>
@@ -93,3 +93,17 @@ graph LR
 ```math
 a + b = c
 ```
+
+
+<!-- code  -->
+### Code
+```
+export default function Prajna(){
+    return(
+        <div>
+            Prajna
+        </div>
+    )
+}
+```
+
