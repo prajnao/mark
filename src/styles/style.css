@@ -1,11 +1,12 @@
 :root {
     --bg: #ffffff;
-    --bg-hover:rgb(240, 240, 240);
+    /* --bg-hover:rgb(240, 240, 240); */
+    --bg-hover:#f2f2f2;
     --fg: #1a1a1a;
     --fg-muted: #6b7280;
     --border: #e5e7eb;
-    --link: #2563eb;
-    --code-bg: #f6f8fa;
+    --link: #1c3771;
+    --code-bg: #F9F8F7;
     --code-fg: #24292f;
     --quote-border: #d1d5db;
     --selection: #dbeafe;
@@ -214,7 +215,7 @@
     line-height: 1.25;
     font-weight: 650;
     letter-spacing: -0.015em;
-    scroll-margin-top: 24px;
+    /* scroll-margin-top: 24px; */
   }
 
   #mark-content h1 { font-size: 30px; letter-spacing: -0.025em; }
@@ -226,7 +227,8 @@
 
   /* Text */
   #mark-content p {
-    margin: 0 0 1.2em;
+    /* margin: 0 0 16px; */
+    font-size: 16px;
   }
 
   #mark-content a {
@@ -390,6 +392,7 @@
     font-size: 10px;
     text-transform: uppercase;
     color: var(--fg-muted);
+    display:none;
   }
 
   #mark-toc {
