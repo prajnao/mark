@@ -1,36 +1,38 @@
 'use client';
+import { HugeiconsIcon } from '@hugeicons/react'
+import { Download03Icon, PuzzleIcon, Settings01Icon, ToggleOnIcon } from '@hugeicons/core-free-icons'
 
-import { useState } from "react";
+// import { useState } from "react";
 
-const browsers = [
-  {
-    id: "chrome",
-    label: "Chrome",
-    icon: ChromeIcon,
-  },
-  {
-    id: "edge",
-    label: "Edge",
-    icon: EdgeIcon,
-  },
-  {
-    id: "firefox",
-    label: "Firefox",
-    icon: FirefoxIcon,
-  },
-  {
-    id: "dia",
-    label: "Dia",
-    icon: DiaIcon,
-  },
-] as const;
+// const browsers = [
+//   {
+//     id: "chrome",
+//     label: "Chrome",
+//     icon: ChromeIcon,
+//   },
+//   {
+//     id: "edge",
+//     label: "Edge",
+//     icon: EdgeIcon,
+//   },
+//   {
+//     id: "firefox",
+//     label: "Firefox",
+//     icon: FirefoxIcon,
+//   },
+//   {
+//     id: "dia",
+//     label: "Dia",
+//     icon: DiaIcon,
+//   },
+// ] as const;
 
 export default function HowToUse(){
-    const [activeBrowser,setActiveBrowser]=useState("chrome");
+    // const [activeBrowser,setActiveBrowser]=useState("chrome");
     
     return(
         <section className="">
-      <h4 className="text-strong font-[450]">How to use</h4>
+      <h4 className="text-strong font-[450] mb-4">How to use</h4>
 
       {/* <div className="bg-[#f7f7f7] m-3 p-1 flex items-center mx-20 justify-between rounded-lg">
        {browsers.map((browser)=>(
@@ -45,9 +47,85 @@ export default function HowToUse(){
        ))}
       </div> */}
 
+   <div className='grid grid-cols-1 gap-4'>
+       {howToUseSteps.map((how)=>{
+        console.log(how,"How")
+       return <div key={how.id} className='flex items-center gap-2 text-sm'> 
+            {/* no  */}
+           {/* <span className='text-muted'>   {how.id}.</span> */}
+            <div className='bg-elevated size-5.5 rounded-[6px] flex justify-center items-center'>
+              {how.Icon}
+            </div>
+
+            {how.link ? 
+            <a href='https://prajnaprabhu.com/' className='cursor-pointer flex items-center  underline underline-offset-4 text-muted hover:text-strong transition-colors decoration-muted/40'>
+              {how.text}
+
+              {how.highlightTexts &&
+              <span className='flex items-center gap-x-1.5 ml-1 text-sm'>
+               {how?.highlightTexts?.map((highlight:string)=> (
+           <span className='bg-elevated rounded px-0 text-sm'>   {highlight},</span>
+
+       
+       ))}
+       </span>
+       }
+            </a>  
+            :   <p className='flex items-center text-sm'> <span>
+              {how.text}
+            </span>
+                  
+            {how.highlightTexts &&
+              <span className='flex items-center gap-x-1.5 ml-1 text-sm'>
+               {how?.highlightTexts?.map((highlight,index)=> (
+           <span className='bg-elevated rounded px-1.5 text-sm'>   {highlight}{index!==how.highlightTexts.length-1 && ","}</span>
+
+       
+       ))}
+       </span>
+       }
+            </p>
+          }
+
+          </div>
+})}
+   </div>
+
     </section>
     )
 }
+
+
+
+const howToUseSteps=[
+  {
+    id:1,
+    Icon:<HugeiconsIcon icon={Download03Icon} size={15} />,
+    text:"Install Mark Extension",
+    link:"https://prajnaprabhu.com"
+  },
+   {
+    id:2,
+    Icon:<HugeiconsIcon icon={PuzzleIcon} size={15} />,
+    text:"Open extensions, pin mark to the toolbar",
+  },
+   {
+    id:3,
+    Icon:<HugeiconsIcon icon={Settings01Icon} size={15} />,
+    text:"Go to extension settings, under site access",
+    link:"https://prajnaprabhu.com"
+  },
+    {
+    id:4,
+    Icon:<HugeiconsIcon icon={ToggleOnIcon} size={15} />,
+    text:"Toggle",
+    highlightTexts:["Automatically allow access on the following sites","Allow access to file URLs"],
+    // link:"https://prajnaprabhu.com"
+    link:""
+  },
+  
+  
+]
 
 
 
@@ -471,6 +549,7 @@ export function DiaIcon({
     </svg>
   );
 }
+
 
 
 

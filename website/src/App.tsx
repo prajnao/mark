@@ -56,7 +56,11 @@ function App() {
     </section>
 
 
-<footer className="text-sm flex justify-between items-center">
+
+<footer className="" >
+  <hr className="mb-4 border-border"/>
+  <div className="text-sm flex justify-between items-center">
+
   <p>Crafter by <a href="https://x.com/prjnap" target="_blank"  rel="noopener noreferrer" aria-label="x" className="text-muted hover:text-strong transition-colors cursor-pointer"><span>prajna</span> </a></p>
 
 
@@ -64,11 +68,13 @@ function App() {
   <div className="flex flex-wrap gap-1.5 text-muted">
     <a href="/changelog" className="hover:text-strong transition-colors">Changelog</a>
   </div>
+  </div>
 </footer>
   </main>
   )
 }
 
 export default App
+
 
 
