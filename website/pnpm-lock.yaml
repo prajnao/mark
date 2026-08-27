@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@hugeicons/core-free-icons':
+        specifier: ^4.3.0
+        version: 4.3.0
+      '@hugeicons/react':
+        specifier: ^1.1.10
+        version: 1.1.10(react@19.2.8)
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.2.2(@types/node@24.13.3)(jiti@2.7.0))
@@ -168,6 +174,14 @@ packages:
   '@eslint/plugin-kit@0.7.2':
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@hugeicons/core-free-icons@4.3.0':
+    resolution: {integrity: sha512-5DC5gq2psNDKBQThOjpuFCtMco8nl2FkrBzZgG15cFGM0kSwUoych/pw0DmjBygF9qRDITdBPtmzJqLsOeImMg==}
+
+  '@hugeicons/react@1.1.10':
+    resolution: {integrity: sha512-9tAsd92yMVVGP+E+d8cM+wc0VnXuYZHNbWQi7TOe8k2neawmhiaFmVFbzyruejhOMa197/LbgvSED32ayUo3ZA==}
+    peerDependencies:
+      react: '>=16.0.0'
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1254,6 +1268,12 @@ snapshots:
     dependencies:
       '@eslint/core': 1.2.1
       levn: 0.4.1
+
+  '@hugeicons/core-free-icons@4.3.0': {}
+
+  '@hugeicons/react@1.1.10(react@19.2.8)':
+    dependencies:
+      react: 19.2.8
 
   '@humanfs/core@0.19.2':
     dependencies:
