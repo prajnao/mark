@@ -5,7 +5,7 @@
   --fg: #1a1a1a;
   --fg-muted: #6b7280;
   --border: #e5e7eb;
-  --link: #1c3771;
+  --link: #005cc5;
   --code-bg: #f9f8f7;
   --code-fg: #24292f;
   --quote-border: #d1d5db;
@@ -309,6 +309,67 @@ body {
 
 #mark-content blockquote p:last-child {
   margin-bottom: 0;
+}
+
+/* task list  */
+#mark-content .task-list-item {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+#mark-content .contains-task-list {
+  padding-left: 0;
+}
+
+#mark-content .contains-task-list .contains-task-list {
+  padding-left: 24px;
+}
+
+#mark-content .task-list-item-checkbox {
+  margin: 0;
+  margin-top: 0.35em;
+  flex: 0 0 auto;
+  accent-color: var(--primary);
+  cursor: default;
+}
+
+/* footnote styles  */
+#mark-content .footnote-ref {
+  font-size: 0.8em;
+  text-decoration: none;
+  padding: 0 2px;
+}
+
+#mark-content .footnotes {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--border);
+  font-size: 0.9em;
+  color: var(--fg-muted);
+}
+
+#mark-content .footnotes-sep {
+  display: none;
+}
+
+#mark-content .footnotes-list {
+  padding-left: 1.5em;
+}
+
+#mark-content .footnote-item {
+  margin: 0.5em 0;
+  scroll-margin-top: 24px;
+}
+
+#mark-content .footnote-item p {
+  margin: 0 0 0.5em;
+}
+
+#mark-content .footnote-backref {
+  text-decoration: none;
+  margin-left: 2px;
 }
 
 /* inline code (one with backtick) */
