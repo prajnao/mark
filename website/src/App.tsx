@@ -61,7 +61,7 @@ function App() {
   <hr className="mb-4 border-border"/>
   <div className="text-sm flex justify-between items-center">
 
-  <p>Crafter by <a href="https://x.com/prjnap" target="_blank"  rel="noopener noreferrer" aria-label="x" className="text-muted hover:text-strong transition-colors cursor-pointer"><span>prajna</span> </a></p>
+  <p>Crafted by <a href="https://x.com/prjnap" target="_blank"  rel="noopener noreferrer" aria-label="x" className="text-muted hover:text-strong transition-colors cursor-pointer"><span>prajna</span> </a></p>
 
 
 

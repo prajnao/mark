@@ -1,6 +1,8 @@
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js/lib/core";
 import { slugify } from "./slugify";
+import taskLists from 'markdown-it-task-lists';
+import footnote from 'markdown-it-footnote';
 
 import typescript from "highlight.js/lib/languages/typescript";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -81,6 +83,12 @@ const md = new MarkdownIt({
   highlight,
 });
 
+
+// support task list and footnotes 
+// md.use(taskLists, {enabled:false,label:true})
+md.use(taskLists, {enabled:false,label:true});
+md.use(footnote);
+
 md.core.ruler.push("heading_id", (state) => {
   const used = new Map<string, number>();
 
@@ -99,6 +107,7 @@ md.core.ruler.push("heading_id", (state) => {
 
   return true;
 });
+
 
 export function renderMarkdown(source: string): string {
   return md.render(source);
