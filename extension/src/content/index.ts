@@ -7,9 +7,11 @@ import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sid
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
 // import katexStyles from "katex/dist/katex.min.css?inline";
 import katexBase from "katex/dist/katex.min.css?inline";
+import katexFonts from "../styles/katex-fonts.css?inline";
 import { renderDiagrams } from "../ui/mermaid.ts";
 
-const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
+// const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
+const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
 
 
 console.log("My Markdown preview extension is running, gg!");
