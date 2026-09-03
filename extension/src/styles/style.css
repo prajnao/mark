@@ -79,7 +79,42 @@ body {
   background: var(--selection);
 }
 
-/* Structure */
+/* mermaid  */
+#mark-content .mark-mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+  padding: 16px;
+  /* background: var(--code-bg); */
+  /* border: 1px solid var(--border); */
+  /* border-radius: 10px; */
+  overflow-x: auto;
+  min-height: 80px;
+}
+
+#mark-content .mark-mermaid svg {
+  max-width: 100%;
+  height: auto;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+#mark-content .mark-mermaid.is-error {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#mark-content .mark-mermaid-error {
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: var(--fg-muted);
+}
+
+#mark-content pre.mermaid-source {
+  min-height: 80px;
+  opacity: 0;
+}
+
+/* code Structure */
 .mark-code {
   margin: 1.5em 0;
   /* border: 1px solid var(--border); */
