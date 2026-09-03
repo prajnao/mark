@@ -5,6 +5,11 @@ import { getHeadings } from "../ui/toc";
 import styles from "../styles/style.css?inline";
 import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sidebar";
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
+// import katexStyles from "katex/dist/katex.min.css?inline";
+import katexBase from "katex/dist/katex.min.css?inline";
+
+const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
+
 
 console.log("My Markdown preview extension is running, gg!");
 
@@ -12,7 +17,7 @@ console.log("My Markdown preview extension is running, gg!");
 
 function addStyles(): void {
   const style = document.createElement("style");
-  style.textContent = styles;
+  style.textContent = styles+katexCss;
   document.head.appendChild(style);
 }
 

@@ -17,7 +17,7 @@
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --measure: 68ch;
+  --measure: 70ch;
 
   --bar-color: rgb(180, 180, 180);
   --rail-hover-bg: #f0f0f0;
@@ -132,6 +132,7 @@ body {
 .mark-code-copy:hover {
   color: var(--fg);
   background: var(--bg-hover);
+  /* background:var(--bg) */
 }
 
 .mark-code-copy.is-done {

@@ -3,6 +3,9 @@ import hljs from "highlight.js/lib/core";
 import { slugify } from "./slugify";
 import taskLists from 'markdown-it-task-lists';
 import footnote from 'markdown-it-footnote';
+import katexModule from "@vscode/markdown-it-katex";
+
+const katexPlugin = (katexModule as unknown as { default?: unknown }).default ?? katexModule;
 
 import typescript from "highlight.js/lib/languages/typescript";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -88,6 +91,10 @@ const md = new MarkdownIt({
 // md.use(taskLists, {enabled:false,label:true})
 md.use(taskLists, {enabled:false,label:true});
 md.use(footnote);
+
+// math rendering parser
+// md.use(katexPlugin)
+md.use(katexPlugin as never);
 
 md.core.ruler.push("heading_id", (state) => {
   const used = new Map<string, number>();
