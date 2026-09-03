@@ -1,7 +1,7 @@
 {
   "name": "Mark",
   "description": "Mark is a simple, intuitive way to read markdown files in your browser",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "manifest_version": 3,
   "content_scripts": [
     {
