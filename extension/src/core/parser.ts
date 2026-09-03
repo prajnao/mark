@@ -68,6 +68,12 @@ function escapeHtml(text: string): string {
 
 function highlight(code: string, info: string): string {
   const raw = (info ?? "").trim().split(/\s+/)[0].toLowerCase();
+
+  if (raw === "mermaid") {
+    return `<pre class="mermaid-source">${escapeHtml(code)}</pre>`;
+  }
+
+
   const lang = ALIASES[raw] ?? raw;
   const known = lang.length > 0 && hljs.getLanguage(lang) !== undefined;
   const label = known ? lang : raw || "text";

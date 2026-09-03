@@ -7,6 +7,7 @@ import { applyStoredCollapse, buildSidebar, trackActiveHeading } from "../ui/sid
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
 // import katexStyles from "katex/dist/katex.min.css?inline";
 import katexBase from "katex/dist/katex.min.css?inline";
+import { renderDiagrams } from "../ui/mermaid.ts";
 
 const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
 
@@ -100,6 +101,7 @@ function main(): void {
     
         const content = buildView(html);
         enhanceCodeBlocks(content);
+        void renderDiagrams(content);
         const headings = getHeadings(content);
     
         if (headings.length > 0) {
