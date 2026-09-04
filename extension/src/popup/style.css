@@ -1,0 +1,161 @@
+/*
+ * Popup styles.
+ *
+ * The popup is a separate document at a chrome-extension:// address.
+ * It does not receive the CSS the content script injects, so it needs
+ * its own copy of the colour variables.
+ *
+ * The three theme states work the same way as the viewer:
+ *   no class      - the media query decides
+ *   .theme-light  - light, even on a dark system
+ *   .theme-dark   - dark, even on a light system
+ */
+
+ :root {
+  --bg: #ffffff;
+  --bg-hover: #f2f2f2;
+  --fg: #1a1a1a;
+  --fg-muted: #6b7280;
+  --border: #e5e7eb;
+
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/*
+ * :not(.theme-light) is the class based theme selection. Without it, a user on a dark system
+ * who chooses Light would still see a dark popup.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    --bg: #191919;
+    --bg-hover: #292929;
+    --fg: #e6edf3;
+    --fg-muted: #9f9f9f;
+    --border: #404040;
+  }
+}
+
+:root.theme-dark {
+  --bg: #191919;
+  --bg-hover: #292929;
+  --fg: #e6edf3;
+  --fg-muted: #9f9f9f;
+  --border: #404040;
+}
+
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+body {
+  width: 160px;
+  min-width: 160px;
+  padding: 14px;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+/* Header */
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.version {
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+
+/* Rows */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 30px;
+}
+
+.row + .row {
+  margin-top: 10px;
+}
+
+.label {
+  color: var(--fg-muted);
+}
+
+/* Controls */
+.select {
+  flex: 0 0 110px;
+  padding: 5px 28px 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 120ms ease;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.select:hover {
+  border-color: var(--fg-muted);
+}
+/* 
+.select:focus-visible {
+  outline: none;
+  border-color: var(--fg-muted);
+} */
+
+.select:focus {
+  outline: none;
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--fg-muted);
+  outline-offset: 1px;
+}
+/* Footer */
+
+.footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.link {
+  color: var(--fg-muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .select {
+    transition: none;
+  }
+}

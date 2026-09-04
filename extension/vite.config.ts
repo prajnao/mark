@@ -1,4 +1,17 @@
 import { defineConfig, type Plugin } from "vite";
+import { crx } from "@crxjs/vite-plugin";
+import manifest from "./manifest.json" with { type: "json" };
+
+function stripKatexFontFaces(): Plugin {
+  return {
+    name: "strip-katex-font-faces",
+    enforce: "pre",
+    transform(code, id) {
+      if (!id.includes("katex.min.css")) return null;
+      return { code: code.replace(/@font-face\s*\{[^}]*\}/g, ""), map: null };
+    },
+  };
+}
 
 function forceAscii(): Plugin {
   return {
@@ -15,37 +28,10 @@ function forceAscii(): Plugin {
   };
 }
 
-function dropFontAssets(): Plugin {
-  return {
-    name: "drop-font-assets",
-    generateBundle(_options, bundle) {
-      for (const [name, file] of Object.entries(bundle)) {
-        if (file.type === "asset" && /\.(woff2?|ttf|eot)$/i.test(name)) {
-          delete bundle[name];
-        }
-      }
-    },
-  };
-}
-
 export default defineConfig({
-  plugins: [forceAscii(), dropFontAssets()],
+  plugins: [stripKatexFontFaces(), crx({ manifest }), forceAscii()],
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    cssCodeSplit: false,
-    rollupOptions: {
-      input: {
-        content: "src/content/index.ts",
-        popup:"src/popup/index.html"
-      },
-      output: {
-        entryFileNames: (chunk) =>
-          chunk.name === "content" ? "content/index.js" : "popup/[name].js",
-        assetFileNames: "content/[name][extname]",
-        format: "es",
-        inlineDynamicImports: true,
-      },
-    },
   },
 });

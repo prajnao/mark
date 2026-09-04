@@ -68,6 +68,33 @@
   }
 }
 
+:root.theme-dark {
+  --bg: #191919;
+  --bg-hover: rgb(41, 41, 41);
+  --fg: #e6edf3;
+  --fg-muted: rgb(159, 159, 159);
+  --border: rgb(64, 64, 64);
+  --link: #58a6ff;
+  --code-bg: #202020;
+  --code-fg: #e6edf3;
+  --quote-border: #3d444d;
+  --selection: #1f3a5f;
+  --sidebar-bg: #0d1117;
+  --bar-color: rgb(84, 84, 91);
+  --rail-hover-bg: #202020;
+  --panel-bg: #191919;
+
+  --code-header-bg: #1a1a1a;
+  --code-comment: #7d8590;
+  --code-keyword: #ff7b72;
+  --code-string: #a5d6ff;
+  --code-number: #79c0ff;
+  --code-function: #d2a8ff;
+  --code-type: #7ee787;
+  --code-variable: #ffa657;
+  --code-punct: #c9d1d9;
+}
+
 html,
 body {
   margin: 0;
@@ -487,7 +514,6 @@ body {
 
 #mark-toc-rail:hover {
   background: var(--rail-hover-bg);
-  transform: background-color;
 }
 
 .mark-toc-bar {
@@ -566,6 +592,7 @@ body {
 .mark-toc-link.is-active {
   /* color: var(--primary); */
   color:var(--fg);
+  background-color: var(--bg-hover);
   font-weight: 550;
 }
 
@@ -585,11 +612,6 @@ body.sidebar-collapsed #mark-toc-panel {
   .mark-toc-link {
     transition: none;
   }
-}
-
-#mark-toc {
-  display: flex;
-  flex-direction: column;
 }
 
 .mark-toc-link:hover {
