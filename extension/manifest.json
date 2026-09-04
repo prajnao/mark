@@ -5,11 +5,14 @@
   "manifest_version": 3,
   "content_scripts": [
     {
-      "js": ["content/index.js"],
+      "js": ["src/content/index.ts"],
       "matches": ["file:///*.md"],
-      "run_at":"document_start"
+      "run_at": "document_start"
     }
   ],
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_title": "Mark"
+  },
   "permissions": ["storage"]
 }
-

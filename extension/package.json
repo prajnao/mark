@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "fonts": "node script/build-katex-fonts.mjs",
-  "dev": "pnpm fonts && vite build --watch",
+  "fonts": "node script/build-katex-fonts.mjs",
+  "dev": "pnpm fonts && vite",
   "build": "pnpm fonts && vite build"
-  },
+},
   "devDependencies": {
+    "@crxjs/vite-plugin": "^2.7.1",
     "@types/chrome": "^0.2.5",
     "typescript": "~6.0.2",
     "vite": "^8.2.0"

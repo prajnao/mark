@@ -9,9 +9,11 @@ import { enhanceCodeBlocks } from "../ui/code-block.ts";
 import katexBase from "katex/dist/katex.min.css?inline";
 import katexFonts from "../styles/katex-fonts.css?inline";
 import { renderDiagrams } from "../ui/mermaid.ts";
+import { applyStoredTheme, watchThemeChanges } from "../ui/theme.ts";
 
 // const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
-const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
+// const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
+const katexCss = katexBase + katexFonts;
 
 
 console.log("My Markdown preview extension is running, gg!");
@@ -87,8 +89,12 @@ function main(): void {
     hideBody();
     setTimeout(reveal, 2000);
   
-    onReady(() => {
+    onReady(async () => {
       try {
+
+        await applyStoredTheme();
+        watchThemeChanges();
+
         const text = getRawText();
         const markdown = removeFrontMatter(text);
         const rendered = renderMarkdown(markdown);

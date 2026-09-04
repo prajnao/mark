@@ -2,9 +2,20 @@ import mermaid from "mermaid";
 
 let initialised = false;
 
+// function currentTheme(): "default" | "dark" {
+//   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+//   return isDark ? "dark" : "default";
+// }
+
 function currentTheme(): "default" | "dark" {
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  return isDark ? "dark" : "default";
+  const root = document.documentElement;
+
+  if (root.classList.contains("theme-dark")) return "dark";
+  if (root.classList.contains("theme-light")) return "default";
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "default";
 }
 
 function init(): void {
