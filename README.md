@@ -1,4 +1,8 @@
-# Mark
+<!-- ![Mark](website/public/logo.png) -->
+<p align="left">
+  <img src="website/public/logo.png" alt="Mark" width="150">
+</p>
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-4285F4?logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore)
