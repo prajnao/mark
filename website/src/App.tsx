@@ -3,7 +3,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   MousePointerClickIcon,
   TableOfContentsIcon,
- Moon02Icon,
+  Moon02Icon,
   TextFontIcon,
   File01Icon,
   SourceCodeIcon,
@@ -20,6 +20,7 @@ import Changelog from "./components/changelog";
 import HowToUse from "./components/how-to-use";
 import MarkWordmark from "./components/logo";
 import { getExtensionVersion } from "./lib/get-version";
+import Privacy from "./components/privacy";
 
 type Feature = {
   icon: ReactNode;
@@ -124,6 +125,9 @@ function App() {
   const isChangelog =
     typeof window !== "undefined" && window.location.pathname === "/changelog";
 
+  const isPrivacy =
+    typeof window !== "undefined" && window.location.pathname === "/privacy";
+
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-y-12 px-4 py-10">
       <section>
@@ -153,7 +157,7 @@ function App() {
           </div>
         </nav>
 
-        {!isChangelog && (
+        {(!isChangelog && !isPrivacy )  && (
           <p className="mt-3 text-sm leading-relaxed text-muted">
             Mark is a simple, intuitive way to read Markdown files in your
             browser.
@@ -163,6 +167,8 @@ function App() {
 
       {isChangelog ? (
         <Changelog />
+      ) : isPrivacy ? (
+        <Privacy />
       ) : (
         <>
           <HowToUse />
@@ -186,11 +192,28 @@ function App() {
             </a>
           </p>
 
-     {!isChangelog &&      <div className="flex flex-wrap gap-1.5 text-muted">
-            <a href="/changelog" className="transition-colors hover:text-strong">
-              Changelog
-            </a>
-          </div>}
+          <div className="flex items-center gap-x-4">
+          {!isChangelog && (
+            <div className="flex flex-wrap gap-1.5 text-muted">
+              <a
+                href="/changelog"
+                className="transition-colors hover:text-strong"
+              >
+                Changelog
+              </a>
+            </div>
+          )}
+
+{!isPrivacy &&  <div className="flex flex-wrap gap-1.5 text-muted">
+              <a
+                href="/privacy"
+                className="transition-colors hover:text-strong"
+              >
+               Privacy
+              </a>
+            </div>}
+
+          </div>
         </div>
       </footer>
     </main>
