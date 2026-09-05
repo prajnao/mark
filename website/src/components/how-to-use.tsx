@@ -53,9 +53,12 @@ export default function HowToUse(){
        return <div key={how.id} className='flex items-center gap-2 text-sm'> 
             {/* no  */}
            {/* <span className='text-muted'>   {how.id}.</span> */}
-            <div className='bg-elevated size-5.5 rounded-[6px] flex justify-center items-center'>
+            {/* <div className='bg-elevated size-5.5 rounded-[6px] flex justify-center items-center'>
               {how.Icon}
-            </div>
+            </div> */}
+                <span className="shrink-0 text-muted">
+              {how.Icon}
+            </span>
 
             {how.link ? 
             <a href='https://prajnaprabhu.com/' className='cursor-pointer flex items-center  underline underline-offset-4 text-muted hover:text-strong transition-colors decoration-muted/40'>

@@ -142,7 +142,7 @@ export default function MarkWordmark() {
   const active = introFinished ? hovered : introActive;
 
   return (
-    <div>
+    <a href="/">
       <main className="grid w-fit place-items-center">
         <div
           className="relative inline-block isolate cursor-pointer -skew-x-[8deg] text-[clamp(32px,10vw,32px)]"
@@ -258,6 +258,6 @@ export default function MarkWordmark() {
           />
         </div>
       </main>
-    </div>
+    </a>
   );
 }

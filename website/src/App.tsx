@@ -1,147 +1,196 @@
+import type { ReactNode } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  MousePointerClickIcon,
+  TableOfContentsIcon,
+ Moon02Icon,
+  TextFontIcon,
+  File01Icon,
+  SourceCodeIcon,
+  MathIcon,
+  FlowchartIcon,
+  Image02Icon,
+  LockedIcon,
+  HardDriveIcon,
+  ShieldIcon,
+  GithubIcon,
+} from "@hugeicons/core-free-icons";
+
+import Changelog from "./components/changelog";
 import HowToUse from "./components/how-to-use";
 import MarkWordmark from "./components/logo";
+import { getExtensionVersion } from "./lib/get-version";
 
-const FEATURES = [
+type Feature = {
+  icon: ReactNode;
+  label: string;
+  description: string;
+};
+
+const ICON_SIZE = 16;
+
+const FEATURES: Feature[] = [
   {
-    label: "Reading",
-    items: [
-      "Opens local .md and .markdown files by double-click",
-      "TOC built from your headings, with a click-to-jump rail",
-      "Light, dark, and system themes",
-      "Typography tuned for long documents",
-    ],
+    icon: <HugeiconsIcon icon={MousePointerClickIcon} size={ICON_SIZE} />,
+    label: "Double-click to read",
+    description: "Open any local .md file straight in your browser",
   },
   {
-    label: "Markdown",
-    items: [
-      "GitHub Flavored Markdown",
-      "Tables",
-      "Task lists",
-      "Footnotes",
-      "Strikethrough and automatic links",
-      "Front matter hidden, not printed as noise",
-    ],
+    icon: <HugeiconsIcon icon={TableOfContentsIcon} size={ICON_SIZE} />,
+    label: "Contents rail",
+    description:
+      "A toc built from your headings, with click-to-jump and live position",
   },
   {
-    label: "Code",
-    items: [
-      "Syntax highlighting for 12 languages",
-      "Language label on every block",
-      "Copy button on hover",
-    ],
+    icon: <HugeiconsIcon icon={Moon02Icon} size={ICON_SIZE} />,
+    label: "Themes",
+    description: "Light, dark, or follow your system",
   },
   {
-    label: "Rich content",
-    items: [
-      "Math with KaTeX, inline and block",
-      "Mermaid diagrams",
-      "SVG and safe embedded HTML",
-      "Local and remote images",
-    ],
+    icon: <HugeiconsIcon icon={TextFontIcon} size={ICON_SIZE} />,
+    label: "Typography",
+    description: "Measure, spacing, and rhythm tuned for long documents",
   },
   {
-    label: "By Design",
-    items: [
-      "Read-only - your file is never modified",
-      "Local-first - nothing is uploaded, no server, no account",
-      "Every document sanitized before it renders",
-      "Free and open source",
-    ],
+    icon: <HugeiconsIcon icon={File01Icon} size={ICON_SIZE} />,
+    label: "GitHub Flavored Markdown",
+    description:
+      "Tables, task lists, footnotes, strikethrough, and automatic links",
+  },
+  {
+    icon: <HugeiconsIcon icon={SourceCodeIcon} size={ICON_SIZE} />,
+    label: "Code blocks",
+    description: "Syntax highlighting with a language label and a copy button",
+  },
+  {
+    icon: <HugeiconsIcon icon={MathIcon} size={ICON_SIZE} />,
+    label: "Math",
+    description: "Inline and block equations rendered with KaTeX",
+  },
+  {
+    icon: <HugeiconsIcon icon={FlowchartIcon} size={ICON_SIZE} />,
+    label: "Diagrams",
+    description: "Mermaid flowcharts, sequences, and more",
+  },
+  {
+    icon: <HugeiconsIcon icon={Image02Icon} size={ICON_SIZE} />,
+    label: "Images and SVG",
+    description: "Local files, remote URLs, and inline vector graphics",
+  },
+  {
+    icon: <HugeiconsIcon icon={LockedIcon} size={ICON_SIZE} />,
+    label: "Read-only",
+    description: "Your file is never touched",
+  },
+  {
+    icon: <HugeiconsIcon icon={HardDriveIcon} size={ICON_SIZE} />,
+    label: "Local-first",
+    description: "Nothing is uploaded. No server, no account",
+  },
+  {
+    icon: <HugeiconsIcon icon={ShieldIcon} size={ICON_SIZE} />,
+    label: "Sanitized",
+    description: "Every document is cleaned before it renders",
+  },
+  {
+    icon: <HugeiconsIcon icon={GithubIcon} size={ICON_SIZE} />,
+    label: "Open source",
+    description: "Free, and the code is public",
   },
 ];
 
-// const FEATURES = [
-//   "Opens local .md and .markdown files by double-click",
-//   "Contents sidebar built from your headings, with a click-to-jump rail",
-//   "Light, dark, and system themes",
-//   "Typography tuned for long documents",
-//   "GitHub Flavored Markdown",
-//   "Tables and task lists",
-//   "Footnotes",
-//   "Strikethrough and automatic links",
-//   "Front matter hidden, not printed as noise",
-//   "Syntax highlighting with a language label and copy button",
-//   "Math with KaTeX, inline and block",
-//   "Mermaid diagrams",
-//   "SVG and safe embedded HTML",
-//   "Local and remote images",
-//   "Read-only — your file is never modified",
-//   "Local-first — nothing is uploaded, no server, no account",
-//   "Every document sanitized before it renders",
-//   "Free and open source",
-// ];
+function Features() {
+  return (
+    <section>
+      <h4 className="mb-4 font-[450] text-strong">Features</h4>
+
+      <div className="grid grid-cols-1 gap-4">
+        {FEATURES.map((feature) => (
+          <div key={feature.label} className="flex items-center gap-2 text-sm">
+            <span className="shrink-0 text-muted">{feature.icon}</span>
+
+            <p className="text-sm">
+              <span className="text-strong">{feature.label}</span>
+              <span className="text-muted"> - {feature.description}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function App() {
+  const isChangelog =
+    typeof window !== "undefined" && window.location.pathname === "/changelog";
+
   return (
-    <main className="min-h-screen px-4 py-20 mx-auto max-w-2xl flex flex-col gap-y-12">
-      <nav className="flex items-center justify-between">
-        <MarkWordmark />
-
-        <div className="flex items-center gap-x-1.5  cursor-pointer">
-          <a
-            href=""
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted transition-colors hover:text-strong"
-          >
-            v1.3.4
-          </a>
-          <a
-            href="https://github.com/prajnao/mark"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="NPM package"
-            className="mb-0.5 inline-flex h-4 w-4 items-center justify-center text-muted transition-colors hover:text-strong"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="h-4 w-4"
-              aria-hidden="true"
-            >
-              <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.5 0-.24-.01-1.03-.01-1.87-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.92c.85 0 1.7.12 2.5.36 1.9-1.33 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.02 1.63 1.02 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.95.68 1.93 0 1.4-.01 2.53-.01 2.88 0 .28.18.6.69.5A10.2 10.2 0 0 0 22 12.23C22 6.58 17.52 2 12 2z" />
-            </svg>
-          </a>
-        </div>
-      </nav>
-
+    <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-y-12 px-4 py-10">
       <section>
-        <p className="text-muted text-sm leading-relaxed">
-          Mark is a simple, intuitive way to read markdown files in your
-          browser.
-        </p>
+        <nav className="flex items-center justify-between">
+          <MarkWordmark />
+
+          <div className="flex items-center gap-x-1.5">
+            <span className="text-muted">{getExtensionVersion()}</span>
+
+            <a
+              href="https://github.com/prajnao/mark"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub repository"
+              className="mb-0.5 inline-flex h-4 w-4 items-center justify-center text-muted transition-colors hover:text-strong"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.5 0-.24-.01-1.03-.01-1.87-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.92c.85 0 1.7.12 2.5.36 1.9-1.33 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.02 1.63 1.02 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.95.68 1.93 0 1.4-.01 2.53-.01 2.88 0 .28.18.6.69.5A10.2 10.2 0 0 0 22 12.23C22 6.58 17.52 2 12 2z" />
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+        {!isChangelog && (
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            Mark is a simple, intuitive way to read Markdown files in your
+            browser.
+          </p>
+        )}
       </section>
 
-      {/* how to use  */}
-      <HowToUse />
+      {isChangelog ? (
+        <Changelog />
+      ) : (
+        <>
+          <HowToUse />
+          <Features />
+        </>
+      )}
 
-      <Features />
-
-      <footer className="">
+      <footer>
         <hr className="mb-4 border-border" />
-        <div className="text-sm flex justify-between items-center">
+
+        <div className="flex items-center justify-between text-sm">
           <p>
             Crafted by{" "}
             <a
               href="https://x.com/prjnap"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="x"
-              className="text-muted hover:text-strong transition-colors cursor-pointer"
+              className="cursor-pointer text-muted transition-colors hover:text-strong"
             >
-              <span>prajna</span>{" "}
+              prajna
             </a>
           </p>
 
-          <div className="flex flex-wrap gap-1.5 text-muted">
-            <a
-              href="/changelog"
-              className="hover:text-strong transition-colors"
-            >
+     {!isChangelog &&      <div className="flex flex-wrap gap-1.5 text-muted">
+            <a href="/changelog" className="transition-colors hover:text-strong">
               Changelog
             </a>
-          </div>
+          </div>}
         </div>
       </footer>
     </main>
@@ -149,27 +198,3 @@ function App() {
 }
 
 export default App;
-
-function Features() {
-  return (
-    <section>
-      <h4 className="text-strong font-[450] mb-4">Features</h4>
-
-      <div className="flex flex-col gap-y-4">
-        {FEATURES.map((group) => (
-          <div>
-            <h2 className="text-[13px] font-[450] mb-2 text-muted">{group.label}</h2>
-
-            <div className="flex flex-col gap-y-1">
-              {group.items.map((item) => (
-                <p className="text-sm">• {item}</p>
-                //  <p className="text-sm">{item}</p>
-              ))}
-            </div>
-            {/* <p className="text-sm">- {group}</p> */}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
