@@ -19,6 +19,13 @@ const katexCss = katexBase + katexFonts;
 console.log("My Markdown preview extension is running, gg!");
 
 
+function setFavicon(): void {
+  const link = document.createElement("link");
+  link.rel = "icon";
+  link.type = "image/png";
+  link.href = chrome.runtime.getURL("icons/icon-32.png");
+  document.head.appendChild(link);
+}
 
 function addStyles(): void {
   const style = document.createElement("style");
@@ -102,7 +109,7 @@ function main(): void {
         const html = purifyHtml(rendered);
         console.log("PURIFIED:", html.slice(0, 600));
 
-        
+        setFavicon();
     
         document.title = getFileName();
         addStyles();

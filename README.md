@@ -1,1 +1,1 @@
-A simple, intuitive way to build markdown in your browser
+A simple, intuitive way to build `Markdown` in your browser
