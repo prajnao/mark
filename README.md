@@ -9,8 +9,6 @@ Double-click a `.md` file and read it like a document, not source code.
 
 **[Install for Chrome](https://chrome.google.com/webstore)** · [Website](https://mark.prajnaprabhu.com) · [Changelog](extension/CHANGELOG.md)
 
----
-
 ## Features
 
 - Opens local `.md` and `.markdown` files by double-click
@@ -27,7 +25,7 @@ Double-click a `.md` file and read it like a document, not source code.
 - Every document sanitized before it renders
 - Free and open source
 
----
+
 ## After install
 ### 1. Allow access to local files
 
@@ -45,7 +43,7 @@ Chrome blocks all extension access to local files by default.
 
 Then double-click any `.md` file.
 
----
+
 
 ## Supported browsers
 
@@ -53,7 +51,6 @@ Chrome, Edge, Brave, Arc, Opera, and similar browsers.
 
 Firefox and Safari support is planned.
 
----
 
 ## Development
 
