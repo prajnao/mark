@@ -1,6 +1,6 @@
 'use client';
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Download03Icon, PuzzleIcon, Settings01Icon, ToggleOnIcon } from '@hugeicons/core-free-icons'
+import { Download03Icon, PuzzleIcon, Settings01Icon, ToggleOnIcon, InternetIcon } from '@hugeicons/core-free-icons'
 
 // import { useState } from "react";
 
@@ -61,7 +61,7 @@ export default function HowToUse(){
             </span>
 
             {how.link ? 
-            <a href='https://prajnaprabhu.com/' className='cursor-pointer flex items-center  underline underline-offset-4 text-muted hover:text-strong transition-colors decoration-muted/40'>
+            <a href={how.link} target='_blank' className='cursor-pointer flex items-center  underline underline-offset-4 text-muted hover:text-strong transition-colors decoration-muted/40'>
               {how.text}
 
               {how.highlightTexts &&
@@ -105,7 +105,7 @@ const howToUseSteps=[
     id:1,
     Icon:<HugeiconsIcon icon={Download03Icon} size={15} />,
     text:"Install Mark Extension",
-    link:"https://prajnaprabhu.com"
+    link:"https://chromewebstore.google.com/detail/mlakoabceocimmnfohpmpjojmgdgijbp"
   },
    {
     id:2,
@@ -115,15 +115,20 @@ const howToUseSteps=[
    {
     id:3,
     Icon:<HugeiconsIcon icon={Settings01Icon} size={15} />,
-    text:"Go to extension settings, under site access",
-    link:"https://prajnaprabhu.com"
+    text:"Right click on the extension and manage extension",
+    // link:"chrome://extensions/?id=mlakoabceocimmnfohpmpjojmgdgijbp"
   },
     {
     id:4,
     Icon:<HugeiconsIcon icon={ToggleOnIcon} size={15} />,
     text:"Toggle",
     highlightTexts:["Automatically allow access on the following sites","Allow access to file URLs"],
-    // link:"https://prajnaprabhu.com"
+    link:""
+  },
+  {
+    id:4,
+    Icon:<HugeiconsIcon icon={InternetIcon} size={15} />,
+    text:"Set your choice of browser as default for markdown files, double click & Magic!",
     link:""
   },
   
