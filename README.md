@@ -11,7 +11,7 @@ Mark is a simple, intuitive way to read Markdown files in your browser.
 
 Double-click a `.md` file and read it like a document, not source code.
 
-[Install for Chrome](https://chrome.google.com/webstore) · [Website](https://mark.prajnaprabhu.com) · [Changelog](extension/CHANGELOG.md)
+[Install for Chrome](https://chromewebstore.google.com/detail/mark/mlakoabceocimmnfohpmpjojmgdgijbp) · [Website](https://mark.prajnaprabhu.com) · [Changelog](extension/CHANGELOG.md)
 
 ## Features
 
