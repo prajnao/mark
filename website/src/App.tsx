@@ -159,8 +159,7 @@ function App() {
 
         {(!isChangelog && !isPrivacy )  && (
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Mark is a simple, intuitive way to read Markdown files in your
-            browser.
+          Mark is a simple, intuitive way to read Markdown files as rich document right your browser
           </p>
         )}
       </section>

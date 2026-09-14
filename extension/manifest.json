@@ -1,6 +1,6 @@
 {
   "name": "Mark",
-  "description": "Mark is a simple, intuitive way to read Markdown files in your browser",
+  "description": "Mark is a simple, intuitive way to read Markdown files as rich document right your browser",
   "version": "0.1.0",
   "manifest_version": 3,
   "icons":{
@@ -16,6 +16,10 @@
       "run_at": "document_start"
     }
   ],
+  "background":{
+    "service_worker":"src/background/index.ts",
+    "type":"module"
+  },
   "action": {
     "default_popup": "src/popup/index.html",
     "default_title": "Mark"
