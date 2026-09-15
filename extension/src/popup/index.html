@@ -6,19 +6,142 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header class="header">
-      <span class="title">Mark</span>
-      <span class="version" id="version"></span>
-    </header>
+    <main class="popup-wrapper">
+      <nav class="nav-wrapper" role="tablist">
+        <button class="nav-item is-active" type="button" role="tab" data-tab="settings" aria-selected="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21.3175 7.14139L20.8239 6.28479C20.4506 5.63696 20.264 5.31305 19.9464 5.18388C19.6288 5.05472 19.2696 5.15664 18.5513 5.36048L17.3311 5.70418C16.8725 5.80994 16.3913 5.74994 15.9726 5.53479L15.6357 5.34042C15.2766 5.11043 15.0004 4.77133 14.8475 4.37274L14.5136 3.37536C14.294 2.71534 14.1842 2.38533 13.9228 2.19657C13.6615 2.00781 13.3143 2.00781 12.6199 2.00781H11.5051C10.8108 2.00781 10.4636 2.00781 10.2022 2.19657C9.94085 2.38533 9.83106 2.71534 9.61149 3.37536L9.27753 4.37274C9.12465 4.77133 8.84845 5.11043 8.48937 5.34042L8.15249 5.53479C7.73374 5.74994 7.25259 5.80994 6.79398 5.70418L5.57375 5.36048C4.85541 5.15664 4.49625 5.05472 4.17867 5.18388C3.86109 5.31305 3.67445 5.63696 3.30115 6.28479L2.80757 7.14139C2.45766 7.74864 2.2827 8.05227 2.31666 8.37549C2.35061 8.69871 2.58483 8.95918 3.05326 9.48012L4.0843 10.6328C4.3363 10.9518 4.51521 11.5078 4.51521 12.0077C4.51521 12.5078 4.33636 13.0636 4.08433 13.3827L3.05326 14.5354C2.58483 15.0564 2.35062 15.3168 2.31666 15.6401C2.2827 15.9633 2.45766 16.2669 2.80757 16.8741L3.30114 17.7307C3.67443 18.3785 3.86109 18.7025 4.17867 18.8316C4.49625 18.9608 4.85542 18.8589 5.57377 18.655L6.79394 18.3113C7.25263 18.2055 7.73387 18.2656 8.15267 18.4808L8.4895 18.6752C8.84851 18.9052 9.12464 19.2442 9.2775 19.6428L9.61149 20.6403C9.83106 21.3003 9.94085 21.6303 10.2022 21.8191C10.4636 22.0078 10.8108 22.0078 11.5051 22.0078H12.6199C13.3143 22.0078 13.6615 22.0078 13.9228 21.8191C14.1842 21.6303 14.294 21.3003 14.5136 20.6403L14.8476 19.6428C15.0004 19.2442 15.2765 18.9052 15.6356 18.6752L15.9724 18.4808C16.3912 18.2656 16.8724 18.2055 17.3311 18.3113L18.5513 18.655C19.2696 18.8589 19.6288 18.9608 19.9464 18.8316C20.264 18.7025 20.4506 18.3785 20.8239 17.7307L21.3175 16.8741C21.6674 16.2669 21.8423 15.9633 21.8084 15.6401C21.7744 15.3168 21.5402 15.0564 21.0718 14.5354L20.0407 13.3827C19.7887 13.0636 19.6098 12.5078 19.6098 12.0077C19.6098 11.5078 19.7888 10.9518 20.0407 10.6328L21.0718 9.48012C21.5402 8.95918 21.7744 8.69871 21.8084 8.37549C21.8423 8.05227 21.6674 7.74864 21.3175 7.14139Z" stroke-linecap="round"></path>
+            <path d="M15.5195 12C15.5195 13.933 13.9525 15.5 12.0195 15.5C10.0865 15.5 8.51953 13.933 8.51953 12C8.51953 10.067 10.0865 8.5 12.0195 8.5C13.9525 8.5 15.5195 10.067 15.5195 12Z"></path>
+          </svg>
+          Settings
+        </button>
 
-    <section class="row">
-      <label class="label" for="theme">Theme</label>
-      <select class="select" id="theme">
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </section>
+        <button class="nav-item" type="button" role="tab" data-tab="appearance" aria-selected="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M2 8C2 8 6.47715 3 12 3C17.5228 3 22 8 22 8" stroke-linecap="round"></path>
+            <path d="M21.544 13.045C21.848 13.4713 22 13.6845 22 14C22 14.3155 21.848 14.5287 21.544 14.955C20.1779 16.8706 16.6892 21 12 21C7.31078 21 3.8221 16.8706 2.45604 14.955C2.15201 14.5287 2 14.3155 2 14C2 13.6845 2.15201 13.4713 2.45604 13.045C3.8221 11.1294 7.31078 7 12 7C16.6892 7 20.1779 11.1294 21.544 13.045Z"></path>
+            <path d="M15 14C15 12.3431 13.6569 11 12 11C10.3431 11 9 12.3431 9 14C9 15.6569 10.3431 17 12 17C13.6569 17 15 15.6569 15 14Z"></path>
+          </svg>
+          Appearance
+        </button>
+
+        <button class="nav-item" type="button" role="tab" data-tab="about" aria-selected="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16V12"></path>
+            <path d="M12.125 8.25H12M12.25 8.25C12.25 8.11193 12.1381 8 12 8C11.8619 8 11.75 8.11193 11.75 8.25C11.75 8.38807 11.8619 8.5 12 8.5C12.1381 8.5 12.25 8.38807 12.25 8.25Z"></path>
+          </svg>
+          About
+        </button>
+      </nav>
+
+      <section class="tab-content-wrapper" data-panel="settings" role="tabpanel">
+        <div class="tab-body tab-body--start">
+          <p class="placeholder">Settings go here.</p>
+        </div>
+      </section>
+
+      <section class="tab-content-wrapper" data-panel="appearance" role="tabpanel" hidden>
+        <div class="tab-body tab-body--start">
+          <div class="setting-row">
+            <span class="setting-label">Theme</span>
+            <select class="select" id="theme-mode">
+              <option value="system">Match system</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+
+          <div class="swatches" id="theme-swatches" data-mode="light" role="radiogroup" aria-label="Theme preset">
+            <button class="swatch is-selected" type="button" role="radio" aria-checked="true" data-theme="white" data-group="light">White</button>
+            <button class="swatch" type="button" role="radio" aria-checked="false" data-theme="paper" data-group="light">Paper</button>
+            <button class="swatch" type="button" role="radio" aria-checked="false" data-theme="dawn" data-group="light">Dawn</button>
+
+            <button class="swatch is-selected" type="button" role="radio" aria-checked="true" data-theme="carbon" data-group="dark">Carbon</button>
+            <button class="swatch" type="button" role="radio" aria-checked="false" data-theme="ink" data-group="dark">Ink</button>
+            <button class="swatch" type="button" role="radio" aria-checked="false" data-theme="onyx" data-group="dark">Onyx</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="setting-row">
+            <span class="setting-label">Font</span>
+            <select class="select" id="font-family">
+              <option value="sans">Sans</option>
+              <option value="serif">Serif</option>
+              <option value="mono">Mono</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label">Font size</span>
+            <div class="stepper">
+              <button class="stepper-btn" type="button" id="font-size-down" aria-label="Decrease font size">
+                <span class="glyph glyph--sm">A</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <button class="stepper-btn" type="button" id="font-size-up" aria-label="Increase font size">
+                <span class="glyph glyph--lg">A</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label">Spacing</span>
+            <div class="stepper">
+              <button class="stepper-btn" type="button" id="spacing-down" aria-label="Decrease line spacing">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9h16M4 12h16M4 15h16"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <button class="stepper-btn" type="button" id="spacing-up" aria-label="Increase line spacing">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label">Width</span>
+            <div class="segmented" role="radiogroup" aria-label="Content width">
+              <button class="segment is-selected" type="button" role="radio" aria-checked="true" data-width="centered">Centered</button>
+              <button class="segment" type="button" role="radio" aria-checked="false" data-width="full">Full</button>
+            </div>
+          </div>
+
+          <button class="reset-btn" type="button" id="reset-appearance">Reset to default</button>
+        </div>
+      </section>
+
+      <section class="tab-content-wrapper" data-panel="about" role="tabpanel" hidden>
+        <div class="tab-body">
+          <div class="logo-wrapper">
+            <img class="logo" src="/full-logo.png" alt="Mark" />
+            <p class="tagline">Markdown reader for the web</p>
+          </div>
+
+          <div class="socials-wrapper">
+            <a class="social link" href="https://x.com/prjnap" aria-label="X">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 21L10.5484 13.4516M21 3L13.4516 10.5484M13.4516 10.5484L8 3H3L10.5484 13.4516M13.4516 10.5484L21 21H16L10.5484 13.4516"></path>
+              </svg>
+            </a>
+
+            <a class="social link" href="https://github.com/prajnao/mark" aria-label="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 20.5675C6.57143 21.7248 3.71429 20.5675 2 17"></path>
+                <path d="M10 22V18.7579C10 18.1596 10.1839 17.6396 10.4804 17.1699C10.6838 16.8476 10.5445 16.3904 10.1771 16.2894C7.13394 15.4528 5 14.1077 5 9.64606C5 8.48611 5.38005 7.39556 6.04811 6.4464C6.21437 6.21018 6.29749 6.09208 6.31748 5.9851C6.33746 5.87813 6.30272 5.73852 6.23322 5.45932C5.95038 4.32292 5.96871 3.11619 6.39322 2.02823C6.39322 2.02823 7.27042 1.74242 9.26698 2.98969C9.72282 3.27447 9.95075 3.41686 10.1515 3.44871C10.3522 3.48056 10.6206 3.41384 11.1573 3.28041C11.8913 3.09795 12.6476 3 13.5 3C14.3524 3 15.1087 3.09795 15.8427 3.28041C16.3794 3.41384 16.6478 3.48056 16.8485 3.44871C17.0493 3.41686 17.2772 3.27447 17.733 2.98969C19.7296 1.74242 20.6068 2.02823 20.6068 2.02823C21.0313 3.11619 21.0496 4.32292 20.7668 5.45932C20.6973 5.73852 20.6625 5.87813 20.6825 5.9851C20.7025 6.09207 20.7856 6.21019 20.9519 6.4464C21.6199 7.39556 22 8.48611 22 9.64606C22 14.1077 19.8661 15.4528 16.8229 16.2894C16.4555 16.3904 16.3162 16.8476 16.5196 17.1699C16.8161 17.6396 17 18.1596 17 18.7579V22"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>Crafted by <a class="link" href="https://prajnaprabhu.com">prajna</a></p>
+          <p id="version"></p>
+        </div>
+      </section>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>

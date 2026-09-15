@@ -1,43 +1,164 @@
-:root {
-  --bg: #ffffff;
-  /* --bg-hover:rgb(240, 240, 240); */
-  --bg-hover: #f2f2f2;
-  --fg: #1a1a1a;
-  --fg-muted: #6b7280;
-  --border: #e5e7eb;
-  --link: #005cc5;
+/*
+ * THEME CONTRACT
+ *
+ * A theme is exactly these 12 tokens plus a base of light or dark.
+ * Nothing else. Custom themes will ship the same 12 and get everything
+ * below for free, so do not add a 13th without deciding it is worth
+ * asking every future theme author to supply it.
+ *
+ *   --bg              page background
+ *   --fg              body text
+ *   --fg-muted        secondary text
+ *   --border          hairlines
+ *   --link            links
+ *   --brand           accent
+ *   --brand-subtle    accent surface
+ *   --code-bg         code block surface
+ *   --code-fg         inline code text
+ *   --surface         raised surface (TOC panel)
+ *   --surface-hover   hover states
+ *   --selection       text selection
+ */
 
-  /* Brand */
-  --brand: #d02467;
-  --brand-subtle: #fdf3f7;
-  --highlight: #f6c33b;
-  --highlight-fg: #1a1a1a;
-
-  --code-bg: #f9f8f7;
-  --code-fg: #c21e5e;
-  --quote-border: #d1d5db;
-  --selection: #fce4ee;
-  --sidebar-w: 260px;
-  --sidebar-bg: #fafafa;
-
+ :root {
+  /* Structure — not part of the theme contract */
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --measure: 70ch;
+  --reader-font-size: 16px;
+  --reader-line-height: 1.5;
 
-  --bar-color: rgb(180, 180, 180);
-  --rail-hover-bg: #f0f0f0;
-  --panel-bg: #ffffff;
+  --measure: 70ch;
   --rail-w: 24px;
   --panel-w: 260px;
   --bar-max: 12px;
   --bar-step: 3px;
   --bar-min: 6px;
 
-  --code-header-bg: #f0f2f5;
+  /* Constant across every theme — the logo yellow */
+  --highlight: #f6c33b;
+  --highlight-fg: #1a1a1a;
+}
+
+/*
+ * Derived tokens. These exist so a theme does not have to declare them,
+ * and so a future custom theme cannot leave them undefined.
+ *
+ * Custom property resolution is lazy, so it does not matter that the
+ * tokens they point at are declared further down.
+ */
+:root {
+  --quote-border: var(--border);
+  --bar-color: var(--fg-muted);
+  --panel-bg: var(--surface);
+  --rail-hover-bg: var(--surface-hover);
+  --bg-hover: var(--surface-hover);
+  --code-border: var(--border);
+}
+
+/* White — also the default before JS sets data-theme */
+:root,
+:root[data-theme="white"] {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --fg-muted: #6b7280;
+  --border: #e5e7eb;
+  --link: #005cc5;
+  --brand: #d02467;
+  --brand-subtle: #fdf3f7;
+  --code-bg: #f9f8f7;
+  --code-fg: #c21e5e;
+  --surface: #ffffff;
+  --surface-hover: #f2f2f2;
+  --selection: #fce4ee;
+}
+
+:root[data-theme="paper"] {
+  --bg: #efefef;
+  --fg: #1a1a1a;
+  --fg-muted: #66666c;
+  --border: #dcdcdc;
+  --link: #005cc5;
+  --brand: #c21e5e;
+  --brand-subtle: #f9e8ef;
+  --code-bg: #e6e6e6;
+  --code-fg: #b81f5b;
+  --surface: #f7f7f7;
+  --surface-hover: #e4e4e4;
+  --selection: #fadbe8;
+}
+
+:root[data-theme="dawn"] {
+  --bg: #fdf6f1;
+  --fg: #2b241f;
+  --fg-muted: #7a6c62;
+  --border: #ece0d7;
+  --link: #0a5ba8;
+  --brand: #b81f5b;
+  --brand-subtle: #fae8ee;
+  --code-bg: #f6ece4;
+  --code-fg: #a81d52;
+  --surface: #fffaf7;
+  --surface-hover: #f3e7df;
+  --selection: #fadbe4;
+}
+
+:root[data-theme="carbon"] {
+  --bg: #191919;
+  --fg: #e6e3df;
+  --fg-muted: #9f9a94;
+  --border: #3a3a3a;
+  --link: #58a6ff;
+  --brand: #ff6b9d;
+  --brand-subtle: #2a1d24;
+  --code-bg: #202020;
+  --code-fg: #ff8fb3;
+  --surface: #1f1f1f;
+  --surface-hover: #292929;
+  --selection: #4a1f35;
+}
+
+/* Ink — dark blue, deliberately lower contrast than Onyx */
+:root[data-theme="ink"] {
+  --bg: #191a23;
+  --fg: #dcdeea;
+  --fg-muted: #8f93a8;
+  --border: #2f3140;
+  --link: #7fb0ff;
+  --brand: #ff7ba6;
+  --brand-subtle: #2b2130;
+  --code-bg: #1f2029;
+  --code-fg: #ff97ba;
+  --surface: #1f2029;
+  --surface-hover: #272834;
+  --selection: #3a2f52;
+}
+
+/* Onyx — true black, maximum contrast */
+:root[data-theme="onyx"] {
+  --bg: #000000;
+  --fg: #ffffff;
+  --fg-muted: #a8a8a8;
+  --border: #2e2e2e;
+  --link: #79b8ff;
+  --brand: #ff7fab;
+  --brand-subtle: #24121a;
+  --code-bg: #0e0e0e;
+  --code-fg: #ff9dbd;
+  --surface: #0d0d0d;
+  --surface-hover: #1a1a1a;
+  --selection: #52203a;
+}
+
+/*
+ * Syntax colours key off data-base, not the theme name, so a custom theme
+ * only has to say which base it is.
+ */
+:root,
+:root[data-base="light"] {
   --code-comment: #6a737d;
   --code-keyword: #d73a49;
-  --code-string: #032f62;
+  --code-string: #0a3069;
   --code-number: #005cc5;
   --code-function: #6f42c1;
   --code-type: #22863a;
@@ -45,64 +166,7 @@
   --code-punct: #24292f;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #191919;
-    --bg-hover: rgb(41, 41, 41);
-    --fg: #e6edf3;
-    --fg-muted: rgb(159, 159, 159);
-    --border: rgb(64, 64, 64);
-    --link: #58a6ff;
-
-    --brand: #ff6b9d;
-    --brand-subtle: #201a1d;
-    --highlight: #f6c33b;
-    --highlight-fg: #1a1a1a;
-
-    --code-bg: #202020;
-    --code-fg: #ff8fb3;
-    --quote-border: #3d444d;
-    --selection: #4a1f35;
-    --sidebar-bg: #0d1117;
-    --bar-color: rgb(84, 84, 91);
-    --rail-hover-bg: #202020;
-    --panel-bg: #191919;
-
-    --code-header-bg: #1a1a1a;
-    --code-comment: #7d8590;
-    --code-keyword: #ff7b72;
-    --code-string: #a5d6ff;
-    --code-number: #79c0ff;
-    --code-function: #d2a8ff;
-    --code-type: #7ee787;
-    --code-variable: #ffa657;
-    --code-punct: #c9d1d9;
-  }
-}
-
-:root.theme-dark {
-  --bg: #191919;
-  --bg-hover: rgb(41, 41, 41);
-  --fg: #e6edf3;
-  --fg-muted: rgb(159, 159, 159);
-  --border: rgb(64, 64, 64);
-  --link: #58a6ff;
-
-  --brand: #ff6b9d;
-  --brand-subtle: #201a1d;
-  --highlight: #f6c33b;
-  --highlight-fg: #1a1a1a;
-
-  --code-bg: #202020;
-  --code-fg: #ff8fb3;
-  --quote-border: #3d444d;
-  --selection: #4a1f35;
-  --sidebar-bg: #0d1117;
-  --bar-color: rgb(84, 84, 91);
-  --rail-hover-bg: #202020;
-  --panel-bg: #191919;
-
-  --code-header-bg: #1a1a1a;
+:root[data-base="dark"] {
   --code-comment: #7d8590;
   --code-keyword: #ff7b72;
   --code-string: #a5d6ff;
@@ -130,9 +194,6 @@ body {
   justify-content: center;
   margin: 1.5em 0;
   padding: 16px;
-  /* background: var(--code-bg); */
-  /* border: 1px solid var(--border); */
-  /* border-radius: 10px; */
   overflow-x: auto;
   min-height: 80px;
 }
@@ -140,7 +201,7 @@ body {
 #mark-content .mark-mermaid svg {
   max-width: 100%;
   height: auto;
-  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body);
 }
 
 #mark-content .mark-mermaid.is-error {
@@ -162,11 +223,9 @@ body {
 /* code Structure */
 .mark-code {
   margin: 1.5em 0;
-  /* border: 1px solid var(--border); */
   border-radius: 10px;
   overflow: hidden;
   background: var(--code-bg);
-  /* padding:6px 14px; */
   padding: 10px 14px;
 }
 
@@ -175,8 +234,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 6px;
-  /* background: var(--code-header-bg); */
-  /* border-bottom: 1px solid var(--border); */
   min-height: 20px;
 }
 
@@ -212,7 +269,6 @@ body {
 .mark-code-copy:hover {
   color: var(--fg);
   background: var(--bg-hover);
-  /* background:var(--bg) */
 }
 
 .mark-code-copy:focus-visible {
@@ -230,8 +286,7 @@ body {
   border: none;
   border-radius: 0;
   background: none;
-  /* padding:2px 14px; */
-  font-size: 13px;
+  font-size: 0.8125em;
   overflow-x: auto;
 }
 
@@ -303,16 +358,25 @@ body {
   }
 }
 
+/*
+ * Reader surface. Everything inside #mark-content sizes in em so the font
+ * size control scales the whole document, not just paragraphs.
+ */
 #mark-root {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 20px 0px;
+  padding: 20px 0;
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+:root[data-width="full"] #mark-root {
+  max-width: none;
+  padding: 20px 40px;
 }
 
 /* Headings */
@@ -325,32 +389,30 @@ body {
   line-height: 1.25;
   font-weight: 650;
   letter-spacing: -0.015em;
-  /* scroll-margin-top: 24px; */
 }
 
 #mark-content h1 {
-  font-size: 30px;
+  font-size: 1.875em;
   letter-spacing: -0.025em;
 }
 #mark-content h2 {
-  font-size: 24px;
+  font-size: 1.5em;
 }
 #mark-content h3 {
-  font-size: 20px;
+  font-size: 1.25em;
 }
 #mark-content h4 {
-  font-size: 18px;
+  font-size: 1.125em;
 }
 #mark-content h5,
 #mark-content h6 {
-  font-size: 16px;
+  font-size: 1em;
   color: var(--fg-muted);
 }
 
 /* Text */
 #mark-content p {
-  /* margin: 0 0 16px; */
-  font-size: 16px;
+  font-size: 1em;
 }
 
 #mark-content a {
@@ -380,7 +442,7 @@ body {
 #mark-content hr {
   border: 0;
   border-top: 1px solid var(--border);
-  margin: 24px 0;
+  margin: 1.5em 0;
 }
 
 /* Lists */
@@ -474,15 +536,12 @@ body {
 
 /* inline code (one with backtick) */
 #mark-content :not(pre) > code {
-  /* font-family: var(--font-mono); */
-  /* font-size: 0.875em; */
-  font-size: 13px;
+  font-size: 0.8125em;
   background: var(--brand-subtle);
-  /* background:var(--rail-hover-bg); */
   color: var(--code-fg);
   padding: 0.15em 0.4em;
   border-radius: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--code-border);
   white-space: nowrap;
 }
 
@@ -491,8 +550,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5em 0;
-  /* font-size: 0.94em; */
-  font-size: 14px;
+  font-size: 0.875em;
 }
 
 #mark-content th,
@@ -609,6 +667,10 @@ body {
   flex-direction: column;
 }
 
+/*
+ * The sidebar stays at a fixed 13px rather than scaling with the reader
+ * font size — it is chrome, not content, and growing it eats the panel.
+ */
 .mark-toc-link {
   display: block;
   padding: 5px 10px 5px calc(10px + var(--depth) * 14px);
@@ -626,11 +688,8 @@ body {
 }
 
 .mark-toc-link.is-active {
-  /* color: var(--fg); */
-  /* background-color: var(--bg-hover); */
   color: var(--brand);
   background: var(--brand-subtle);
-  /* font-weight: 550; */
 }
 
 .mark-toc-link:focus-visible {
@@ -657,11 +716,8 @@ body.sidebar-collapsed #mark-toc-panel {
 }
 
 .mark-toc-link:hover {
-  /* color: var(--fg); */
-  /* background: var(--bg -hover); */
-
-  color: var(--brand);
-  background: var(--brand-subtle);
+  color: var(--fg);
+  background: var(--bg-hover);
 }
 
 #mark-toggle:hover {
