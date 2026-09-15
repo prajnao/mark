@@ -1,4 +1,25 @@
-import { applyTheme, loadTheme, saveTheme, isTheme } from "../ui/theme";
+import {
+  loadAppearance,
+  saveAppearance,
+  resolveMode,
+  clamp,
+  round1,
+  DEFAULTS,
+  FONT_SIZE_MIN,
+  FONT_SIZE_MAX,
+  FONT_SIZE_STEP,
+  SPACING_MIN,
+  SPACING_MAX,
+  SPACING_STEP,
+  type Appearance,
+  type ThemeMode,
+  type LightTheme,
+  type DarkTheme,
+  type FontFamily,
+  type Width,
+} from "../lib/appearance";
+
+let state: Appearance = { ...DEFAULTS };
 
 function showVersion(): void {
   const element = document.getElementById("version");
@@ -7,28 +28,200 @@ function showVersion(): void {
   element.textContent = `v${chrome.runtime.getManifest().version}`;
 }
 
+function setupTabs(): void {
+  const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
+  const panels = document.querySelectorAll<HTMLElement>("[data-panel]");
 
-async function setupTheme(): Promise<void> {
-  const select = document.getElementById("theme");
+  function show(name: string): void {
+    tabs.forEach((tab) => {
+      const active = tab.dataset.tab === name;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.panel !== name;
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      if (tab.dataset.tab) show(tab.dataset.tab);
+    });
+  });
+}
+
+function isThemeMode(value: string): value is ThemeMode {
+  return value === "system" || value === "light" || value === "dark";
+}
+
+function isFontFamily(value: string): value is FontFamily {
+  return value === "sans" || value === "serif" || value === "mono";
+}
+
+function isWidth(value: string): value is Width {
+  return value === "centered" || value === "full";
+}
+
+function isLightTheme(value: string): value is LightTheme {
+  return value === "white" || value === "paper" || value === "dawn";
+}
+
+function isDarkTheme(value: string): value is DarkTheme {
+  return value === "carbon" || value === "ink" || value === "onyx";
+}
+
+/**
+ * Single source of truth for the UI: every change goes through here, so the
+ * DOM is always redrawn from state rather than patched in place.
+ */
+function render(): void {
+  const resolved = resolveMode(state.mode);
+
+  const modeSelect = document.getElementById("theme-mode");
+  if (modeSelect instanceof HTMLSelectElement) {
+    modeSelect.value = state.mode;
+  }
+
+  const swatchGroup = document.getElementById("theme-swatches");
+  if (swatchGroup) {
+    // CSS hides the group that doesn't match; JS only sets the attribute.
+    swatchGroup.dataset.mode = resolved;
+  }
+
+  const selectedTheme =
+    resolved === "dark" ? state.darkTheme : state.lightTheme;
+
+  document.querySelectorAll<HTMLElement>("[data-theme]").forEach((swatch) => {
+    const selected = swatch.dataset.theme === selectedTheme;
+    swatch.classList.toggle("is-selected", selected);
+    swatch.setAttribute("aria-checked", String(selected));
+  });
+
+  const fontSelect = document.getElementById("font-family");
+  if (fontSelect instanceof HTMLSelectElement) {
+    fontSelect.value = state.font;
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-width]").forEach((segment) => {
+    const selected = segment.dataset.width === state.width;
+    segment.classList.toggle("is-selected", selected);
+    segment.setAttribute("aria-checked", String(selected));
+  });
+
+  // Disable steppers at the limits (max and min values)
+  setDisabled("font-size-down", state.fontSize <= FONT_SIZE_MIN);
+  setDisabled("font-size-up", state.fontSize >= FONT_SIZE_MAX);
+  setDisabled("spacing-down", state.spacing <= SPACING_MIN);
+  setDisabled("spacing-up", state.spacing >= SPACING_MAX);
+}
+
+function setDisabled(id: string, disabled: boolean): void {
+  const element = document.getElementById(id);
+  if (element instanceof HTMLButtonElement) element.disabled = disabled;
+}
+
+function commit(patch: Partial<Appearance>): void {
+  state = { ...state, ...patch };
+  render();
+  void saveAppearance(state);
+}
+
+function setupThemeMode(): void {
+  const select = document.getElementById("theme-mode");
   if (!(select instanceof HTMLSelectElement)) return;
 
-  const theme = await loadTheme();
+  select.addEventListener("change", () => {
+    if (!isThemeMode(select.value)) return;
+    commit({ mode: select.value });
+  });
+}
 
-  // popup is its own separate document, so it needs the class too.
-  applyTheme(theme);
-  select.value = theme;
+function setupSwatches(): void {
+  document.querySelectorAll<HTMLElement>("[data-theme]").forEach((swatch) => {
+    swatch.addEventListener("click", () => {
+      const theme = swatch.dataset.theme;
+      const group = swatch.dataset.group;
+      if (!theme) return;
+
+      // Which field to write depends on the swatch's own group, not the
+      // current mode — they're always the same here, but keying off the
+      // element keeps it correct if the groups are ever both visible.
+      if (group === "dark") {
+        if (isDarkTheme(theme)) commit({ darkTheme: theme });
+      } else {
+        if (isLightTheme(theme)) commit({ lightTheme: theme });
+      }
+    });
+  });
+}
+
+function setupFont(): void {
+  const select = document.getElementById("font-family");
+  if (!(select instanceof HTMLSelectElement)) return;
 
   select.addEventListener("change", () => {
-    if (!isTheme(select.value)) return;
+    if (!isFontFamily(select.value)) return;
+    commit({ font: select.value });
+  });
+}
 
-    applyTheme(select.value);
-    void saveTheme(select.value);
+function setupSteppers(): void {
+  function step(id: string, delta: number, key: "fontSize" | "spacing"): void {
+    document.getElementById(id)?.addEventListener("click", () => {
+      if (key === "fontSize") {
+        const next = clamp(
+          state.fontSize + delta,
+          FONT_SIZE_MIN,
+          FONT_SIZE_MAX,
+        );
+        commit({ fontSize: next });
+      } else {
+        const next = round1(
+          clamp(state.spacing + delta, SPACING_MIN, SPACING_MAX),
+        );
+        commit({ spacing: next });
+      }
+    });
+  }
+
+  step("font-size-down", -FONT_SIZE_STEP, "fontSize");
+  step("font-size-up", FONT_SIZE_STEP, "fontSize");
+  step("spacing-down", -SPACING_STEP, "spacing");
+  step("spacing-up", SPACING_STEP, "spacing");
+}
+
+function setupWidth(): void {
+  document.querySelectorAll<HTMLElement>("[data-width]").forEach((segment) => {
+    segment.addEventListener("click", () => {
+      const width = segment.dataset.width;
+      if (!width || !isWidth(width)) return;
+      commit({ width });
+    });
+  });
+}
+
+function setupReset(): void {
+  document.getElementById("reset-appearance")?.addEventListener("click", () => {
+    commit({ ...DEFAULTS });
   });
 }
 
 async function main(): Promise<void> {
   showVersion();
-  await setupTheme();
+  setupTabs();
+
+  
+
+  state = await loadAppearance();
+  render();
+
+  setupThemeMode();
+  setupSwatches();
+  setupFont();
+  setupSteppers();
+  setupWidth();
+  setupReset();
 }
 
 void main();
