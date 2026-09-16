@@ -38,7 +38,7 @@ export const SPACING_MAX = 2.0;
 export const SPACING_STEP = 0.1;
 
 export const WIDTH_MIN = 60;
-export const WIDTH_MAX = 150;
+export const WIDTH_MAX = 130;
 export const WIDTH_STEP = 5;
 
 export function clamp(value: number, min: number, max: number): number {

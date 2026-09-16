@@ -81,6 +81,8 @@ function isDarkTheme(value: string): value is DarkTheme {
 function render(): void {
   const resolved = resolveMode(state.mode);
 
+  document.documentElement.dataset.base = resolved;
+
   const modeSelect = document.getElementById("theme-mode");
   if (modeSelect instanceof HTMLSelectElement) {
     modeSelect.value = state.mode;
