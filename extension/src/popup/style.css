@@ -27,6 +27,27 @@
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
+:root[data-base="dark"] {
+  color-scheme: dark;
+
+  /* Mirrors the light ramp: track sits below the page, surface above it. */
+  --bg: #1e1e1e;
+  --bg-hover: #333333;
+  --surface: #2b2b2b;
+  --track: #161616;
+
+  --fg: #e6e3df;
+  --fg-muted: #9a958f;
+  --border: #3a3a3a;
+
+  --brand: #ff6b9d;
+}
+
+:root[data-base="dark"] .select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a958f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
+
 * {
   box-sizing: border-box;
 }
@@ -42,6 +63,8 @@ body {
   flex-direction: column;
   width: 330px;
   padding: 8px;
+  /* background: #000; */
+  margin-bottom: 4px;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
@@ -62,13 +85,12 @@ body {
 }
 
 /* Tabs */
-
 .nav-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2px;
-  padding: 4px;
+  padding: 7px;
   background: var(--track);
   border-radius: 8px;
 }
@@ -114,7 +136,7 @@ body {
   flex-direction: column;
   flex: 1;
   width: 100%;
-  padding: 3px 8px;
+  padding: 10px 8px;
 }
 
 .tab-body {
@@ -373,11 +395,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: 6px;
   padding: 8px;
   border-radius: 6px;
-  background: var(--track);
-  color: var(--fg-muted);
+  /* background: var(--track); */
+  background:var(--brand);
+  /* color: var(--fg); */
+  border: 1px solid var(--border);
+  color: white;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -420,9 +445,9 @@ body {
 .socials-wrapper {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   width: fit-content;
-  padding: 3px 4px;
+  padding: 6px 8px;
   background: var(--track);
   border-radius: 6px;
 }
@@ -431,7 +456,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 6px 12px;
   background: var(--surface);
   border-radius: 5px;
   color: var(--fg-muted);

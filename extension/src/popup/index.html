@@ -46,7 +46,7 @@
           <div class="setting-row">
             <span class="setting-label">Theme</span>
             <select class="select" id="theme-mode">
-              <option value="system">Match system</option>
+              <option value="system">System</option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
             </select>
@@ -101,11 +101,25 @@
             </div>
           </div>
 
-          <div class="setting-row">
+          <!-- <div class="setting-row">
             <span class="setting-label">Width</span>
             <div class="segmented" role="radiogroup" aria-label="Content width">
               <button class="segment is-selected" type="button" role="radio" aria-checked="true" data-width="centered">Centered</button>
               <button class="segment" type="button" role="radio" aria-checked="false" data-width="full">Full</button>
+            </div>
+          </div> -->
+
+          <div class="setting-row">
+            <span class="setting-label">Width</span>
+            <div class="stepper">
+              <button class="stepper-btn" type="button" id="width-down" aria-label="Decrease content width">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 8h8M8 12h8M8 16h8"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <button class="stepper-btn" type="button" id="width-up" aria-label="Increase content width">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8h18M3 12h18M3 16h18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+              </button>
             </div>
           </div>
 

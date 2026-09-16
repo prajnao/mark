@@ -2,7 +2,6 @@ export type ThemeMode = "system" | "light" | "dark";
 export type LightTheme = "white" | "paper" | "dawn";
 export type DarkTheme = "carbon" | "ink" | "onyx";
 export type FontFamily = "sans" | "serif" | "mono";
-export type Width = "centered" | "full";
 
 export interface Appearance {
   mode: ThemeMode;
@@ -15,7 +14,7 @@ export interface Appearance {
   font: FontFamily;
   fontSize: number;
   spacing: number;
-  width: Width;
+  width: number;
 }
 
 export const APPEARANCE_KEY = "appearance";
@@ -27,7 +26,7 @@ export const DEFAULTS: Appearance = {
   font: "sans",
   fontSize: 16,
   spacing: 1.5,
-  width: "centered",
+  width: 70,
 };
 
 export const FONT_SIZE_MIN = 13;
@@ -37,6 +36,10 @@ export const FONT_SIZE_STEP = 1;
 export const SPACING_MIN = 1.2;
 export const SPACING_MAX = 2.0;
 export const SPACING_STEP = 0.1;
+
+export const WIDTH_MIN = 60;
+export const WIDTH_MAX = 130;
+export const WIDTH_STEP = 5;
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));

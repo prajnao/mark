@@ -11,12 +11,14 @@ import {
   SPACING_MIN,
   SPACING_MAX,
   SPACING_STEP,
+  WIDTH_MIN,
+  WIDTH_MAX,
+  WIDTH_STEP,
   type Appearance,
   type ThemeMode,
   type LightTheme,
   type DarkTheme,
   type FontFamily,
-  type Width,
 } from "../lib/appearance";
 
 let state: Appearance = { ...DEFAULTS };
@@ -51,16 +53,17 @@ function setupTabs(): void {
   });
 }
 
+/*
+ * Type guards. Width needs none now that it is a plain number — clamp
+ * keeps it inside the range, so there is nothing to validate.
+ */
+
 function isThemeMode(value: string): value is ThemeMode {
   return value === "system" || value === "light" || value === "dark";
 }
 
 function isFontFamily(value: string): value is FontFamily {
   return value === "sans" || value === "serif" || value === "mono";
-}
-
-function isWidth(value: string): value is Width {
-  return value === "centered" || value === "full";
 }
 
 function isLightTheme(value: string): value is LightTheme {
@@ -77,6 +80,8 @@ function isDarkTheme(value: string): value is DarkTheme {
  */
 function render(): void {
   const resolved = resolveMode(state.mode);
+
+  document.documentElement.dataset.base = resolved;
 
   const modeSelect = document.getElementById("theme-mode");
   if (modeSelect instanceof HTMLSelectElement) {
@@ -103,17 +108,13 @@ function render(): void {
     fontSelect.value = state.font;
   }
 
-  document.querySelectorAll<HTMLElement>("[data-width]").forEach((segment) => {
-    const selected = segment.dataset.width === state.width;
-    segment.classList.toggle("is-selected", selected);
-    segment.setAttribute("aria-checked", String(selected));
-  });
-
   // Disable steppers at the limits (max and min values)
   setDisabled("font-size-down", state.fontSize <= FONT_SIZE_MIN);
   setDisabled("font-size-up", state.fontSize >= FONT_SIZE_MAX);
   setDisabled("spacing-down", state.spacing <= SPACING_MIN);
   setDisabled("spacing-up", state.spacing >= SPACING_MAX);
+  setDisabled("width-down", state.width <= WIDTH_MIN);
+  setDisabled("width-up", state.width >= WIDTH_MAX);
 }
 
 function setDisabled(id: string, disabled: boolean): void {
@@ -167,20 +168,27 @@ function setupFont(): void {
 }
 
 function setupSteppers(): void {
-  function step(id: string, delta: number, key: "fontSize" | "spacing"): void {
+  function step(
+    id: string,
+    delta: number,
+    key: "fontSize" | "spacing" | "width",
+  ): void {
     document.getElementById(id)?.addEventListener("click", () => {
       if (key === "fontSize") {
-        const next = clamp(
-          state.fontSize + delta,
-          FONT_SIZE_MIN,
-          FONT_SIZE_MAX,
-        );
-        commit({ fontSize: next });
+        commit({
+          fontSize: clamp(state.fontSize + delta, FONT_SIZE_MIN, FONT_SIZE_MAX),
+        });
+      } else if (key === "spacing") {
+        // round1 because 1.5 + 0.1 is 1.6000000000000001 in float maths.
+        commit({
+          spacing: round1(
+            clamp(state.spacing + delta, SPACING_MIN, SPACING_MAX),
+          ),
+        });
       } else {
-        const next = round1(
-          clamp(state.spacing + delta, SPACING_MIN, SPACING_MAX),
-        );
-        commit({ spacing: next });
+        commit({
+          width: clamp(state.width + delta, WIDTH_MIN, WIDTH_MAX),
+        });
       }
     });
   }
@@ -189,16 +197,8 @@ function setupSteppers(): void {
   step("font-size-up", FONT_SIZE_STEP, "fontSize");
   step("spacing-down", -SPACING_STEP, "spacing");
   step("spacing-up", SPACING_STEP, "spacing");
-}
-
-function setupWidth(): void {
-  document.querySelectorAll<HTMLElement>("[data-width]").forEach((segment) => {
-    segment.addEventListener("click", () => {
-      const width = segment.dataset.width;
-      if (!width || !isWidth(width)) return;
-      commit({ width });
-    });
-  });
+  step("width-down", -WIDTH_STEP, "width");
+  step("width-up", WIDTH_STEP, "width");
 }
 
 function setupReset(): void {
@@ -211,8 +211,6 @@ async function main(): Promise<void> {
   showVersion();
   setupTabs();
 
-  
-
   state = await loadAppearance();
   render();
 
@@ -220,7 +218,6 @@ async function main(): Promise<void> {
   setupSwatches();
   setupFont();
   setupSteppers();
-  setupWidth();
   setupReset();
 }
 

@@ -1,4 +1,5 @@
 import {
+  WIDTH_MAX,
     APPEARANCE_KEY,
     DEFAULTS,
     loadAppearance,
@@ -25,7 +26,13 @@ import {
     root.dataset.theme =
     resolved === "dark" ? appearance.darkTheme : appearance.lightTheme;
   root.dataset.base = resolved;
-  root.dataset.width = appearance.width;
+  // root.dataset.width = appearance.width;
+  if (appearance.width >= WIDTH_MAX) {
+    root.dataset.width = "full";
+  } else {
+    delete root.dataset.width;
+    root.style.setProperty("--measure", `${appearance.width}ch`);
+  }
   
     root.style.setProperty("--font-body", FONT_STACKS[appearance.font]);
     root.style.setProperty("--reader-font-size", `${appearance.fontSize}px`);

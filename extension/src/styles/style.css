@@ -38,7 +38,10 @@
   /* Constant across every theme — the logo yellow */
   --highlight: #f6c33b;
   --highlight-fg: #1a1a1a;
+
+  --content-gutter: calc(var(--rail-w) + 24px);
 }
+
 
 /*
  * Derived tokens. These exist so a theme does not have to declare them,
@@ -376,8 +379,10 @@ body {
 
 :root[data-width="full"] #mark-root {
   max-width: none;
-  padding: 20px 40px;
+  /* padding: 20px 40px; */
+  padding: 20px 40px 20px var(--content-gutter);
 }
+
 
 /* Headings */
 #mark-content h1,
