@@ -394,6 +394,21 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* heading spacing  */
+#mark-content h1,
+#mark-content h2,
+#mark-content h3,
+#mark-content h4,
+#mark-content h5,
+#mark-content h6 {
+  margin: 1.5em 0 0.6em;
+}
+
+/* Nothing should push the first element away from the top of the page. */
+#mark-content > :first-child {
+  margin-top: 0;
+}
+
 #mark-content h1 {
   font-size: 1.875em;
   letter-spacing: -0.025em;
@@ -749,6 +764,17 @@ scroll-padding-top: 44px;
   background: transparent;
   padding: 8px 8px 14px;
   margin-top: 32px;
+}
+
+:root[data-sidebar="fixed"] #mark-sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--surface);
+  z-index: 1;
 }
 
 :root[data-sidebar="fixed"] #mark-main {
