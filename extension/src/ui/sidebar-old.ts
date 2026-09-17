@@ -3,7 +3,7 @@ import type { TocItem } from "./toc";
 const COLLAPSE_KEY = "sidebar-collapsed";
 
 export function buildSidebar(items: TocItem[]): HTMLElement {
-  console.log(items,"items")
+  // console.log(items,"items")
   const sidebar = document.createElement("aside");
   sidebar.id = "mark-sidebar";
 

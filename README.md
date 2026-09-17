@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-4285F4?logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore)
 
-Mark is a simple, intuitive way to read Markdown files in your browser.
+Mark is a simple, intuitive way to read Markdown files as rich document right in your browser
 
 Double-click a `.md` file and read it like a document, not source code.
 

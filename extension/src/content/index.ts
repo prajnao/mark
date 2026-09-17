@@ -24,7 +24,7 @@ import { buildFullScreenButton } from "../ui/fullscreen.ts";
 // const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
 const katexCss = katexBase + katexFonts;
 
-console.log("My Markdown preview extension is running, gg!");
+// console.log("My Markdown preview extension is running, gg!");
 
 function setFavicon(): void {
   const link = document.createElement("link");
@@ -113,9 +113,9 @@ function main(): void {
       const text = getRawText();
       const markdown = removeFrontMatter(text);
       const rendered = renderMarkdown(markdown);
-      console.log("PARSED:", rendered.slice(0, 600));
+      // console.log("PARSED:", rendered.slice(0, 600));
       const html = purifyHtml(rendered);
-      console.log("PURIFIED:", html.slice(0, 600));
+      // console.log("PURIFIED:", html.slice(0, 600));
 
       setFavicon();
 

@@ -4,7 +4,7 @@ export default function Privacy() {
         <section className="flex flex-col gap-3">
           <header className="flex items-baseline gap-3">
             <h2 className="font-medium text-strong">Privacy</h2>
-            <span className="text-xs text-muted">5 September 2026</span>
+            <span className="text-xs text-muted">17 September 2026</span>
           </header>
   
           <div className="flex flex-col gap-3 text-muted text-sm">
@@ -17,10 +17,11 @@ export default function Privacy() {
             </p>
   
             <p>
-              The extension stores only your display preferences, your theme
-              choice and sidebar state using your browser's local storage. This
-              data stays on your device and is never transmitted.
-            </p>
+  The extension stores only your display preferences — your theme,
+  font, text size, spacing, content width, and sidebar layout — using
+  your browser's local storage. This data stays on your device and is
+  never transmitted.
+</p>
   
             <p>There is no server, no account, and no analytics.</p>
   
