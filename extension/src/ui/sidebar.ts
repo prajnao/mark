@@ -59,13 +59,16 @@ export function buildSidebar(items: TocItem[]): HTMLElement {
   }
 
   panel.appendChild(nav);
+  // sidebar.appendChild(buildSidebarToggle());
   sidebar.appendChild(rail);
   sidebar.appendChild(panel);
 
-    rail.addEventListener("click", () => {
-    const collapsed = document.body.classList.toggle("sidebar-collapsed");
-    void chrome.storage.local.set({ [COLLAPSE_KEY]: collapsed });
-  });
+  //   rail.addEventListener("click", () => {
+  //   const collapsed = document.body.classList.toggle("sidebar-collapsed");
+  //   void chrome.storage.local.set({ [COLLAPSE_KEY]: collapsed });
+  // });
+
+  rail.addEventListener('click',toggleCollapse);
 
   return sidebar;
 }
@@ -140,19 +143,34 @@ export function trackActiveHeading(items: TocItem[]): void {
   update();
 }
 
-// export function buildToggle(): HTMLElement {
-//   const button = document.createElement("button");
-//   button.id = "mark-toggle";
-//   button.title = "Contents";
-//   button.textContent = "☰";
+function toggleCollapse(): void {
+  const collapsed = document.body.classList.toggle("sidebar-collapsed");
+  void chrome.storage.local.set({ [COLLAPSE_KEY]: collapsed });
+}
 
-//   button.addEventListener("click", () => {
-//     const collapsed = document.body.classList.toggle("sidebar-collapsed");
-//     void chrome.storage.local.set({ [COLLAPSE_KEY]: collapsed });
-//   });
 
-//   return button;
-// }
+export function buildSidebarToggle(): HTMLButtonElement {
+  const button = document.createElement("button");
+  button.id = "mark-sidebar-toggle";
+  button.type="button";
+  button.setAttribute('aria-label',"Toggle contents");
+
+  // button.addEventListener("click", () => {
+  //   const collapsed = document.body.classList.toggle("sidebar-collapsed");
+  //   void chrome.storage.local.set({ [COLLAPSE_KEY]: collapsed });
+  // });
+  button.addEventListener('click', toggleCollapse);
+
+  button.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect width="18" height="18" x="3" y="3" rx="2"/>
+    <path d="M9 3v18"/>
+  </svg>
+`;
+
+
+  return button;
+}
 
 export async function applyStoredCollapse(): Promise<void> {
   try {

@@ -5,6 +5,7 @@ import styles from "../styles/style.css?inline";
 import {
   applyStoredCollapse,
   buildSidebar,
+  buildSidebarToggle,
   trackActiveHeading,
 } from "../ui/sidebar";
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
@@ -130,7 +131,7 @@ function main(): void {
       if (headings.length > 0) {
         const shell = document.getElementById("mark-shell")!;
         shell.insertBefore(buildSidebar(headings), shell.firstChild);
-        // document.body.appendChild(buildToggle());
+        document.body.appendChild(buildSidebarToggle());
         trackActiveHeading(headings);
       }
 

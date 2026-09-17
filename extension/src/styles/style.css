@@ -394,6 +394,21 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* heading spacing  */
+#mark-content h1,
+#mark-content h2,
+#mark-content h3,
+#mark-content h4,
+#mark-content h5,
+#mark-content h6 {
+  margin: 1.5em 0 0.6em;
+}
+
+/* Nothing should push the first element away from the top of the page. */
+#mark-content > :first-child {
+  margin-top: 0;
+}
+
 #mark-content h1 {
   font-size: 1.875em;
   letter-spacing: -0.025em;
@@ -416,6 +431,7 @@ body {
 /* Text */
 #mark-content p {
   font-size: 1em;
+  /* color: var(--fg-muted); */
 }
 
 #mark-content a {
@@ -545,6 +561,7 @@ body {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   border: 1px solid var(--code-border);
+  /* border: 1px solid var(--brand); */
   white-space: nowrap;
 }
 
@@ -711,6 +728,115 @@ body.sidebar-collapsed #mark-toc-panel {
     visibility 0s 180ms;
 }
 
+
+/* fixed sidebar styling  */
+:root[data-sidebar="fixed"] #mark-sidebar{
+  top: 0;
+  left: 0;
+  align-items: stretch;
+  padding: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  width:var(--panel-w);
+}
+
+/* hide the rail when sidebar type is fixed  */
+:root[data-sidebar="fixed"] #mark-toc-rail{
+  display: none;
+}
+
+/* :root[data-sidebar="fixed"] #mark-toc-panel {
+  flex: 1;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 44px 8px 14px;
+scroll-padding-top: 44px;
+} */
+
+/* this is to handle the toc content to go behind the toggle icon header  */
+:root[data-sidebar="fixed"] #mark-toc-panel {
+  flex: 1;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 8px 8px 14px;
+  margin-top: 32px;
+}
+
+:root[data-sidebar="fixed"] #mark-sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--surface);
+  z-index: 1;
+}
+
+:root[data-sidebar="fixed"] #mark-main {
+  margin-left: var(--panel-w);
+  transition: margin-left 280ms cubic-bezier(0.32, 0.72, 0,1);
+}
+
+:root[data-sidebar="fixed"] body.sidebar-collapsed #mark-main {
+  margin-left: 0;
+}
+
+/* collapse sidebar in fixed mode  */
+:root[data-sidebar="fixed"] body.sidebar-collapsed #mark-sidebar {
+  transform: translateX(-100%);
+}
+
+:root[data-sidebar="fixed"] #mark-sidebar {
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root.no-transition #mark-sidebar,
+:root.no-transition #mark-main,
+:root.no-transition #mark-toc-panel {
+  transition: none !important;
+}
+
+/* sidebar toggle button  */
+#mark-sidebar-toggle {
+  all: unset;
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--fg-muted);
+   background: var(--surface);
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    background 120ms ease;
+}
+
+:root[data-sidebar="fixed"] #mark-sidebar-toggle {
+  display: flex;
+}
+
+#mark-sidebar-toggle:hover {
+  color: var(--fg);
+  background: var(--surface-hover);
+}
+
+#mark-sidebar-toggle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+
 /* fullscreen button styles  */
 #mark-fullscreen {
   all: unset;
@@ -756,11 +882,10 @@ body.sidebar-collapsed #mark-toc-panel {
 
 @media (prefers-reduced-motion: reduce) {
   .mark-toc-bar,
-  .mark-toc-link {
-    transition: none;
-  }
-
-  #mark-fullscreen {
+  .mark-toc-link,
+  #mark-fullscreen,
+  :root[data-sidebar="fixed"] #mark-sidebar,
+  :root[data-sidebar="fixed"] #mark-main {
     transition: none;
   }
 }

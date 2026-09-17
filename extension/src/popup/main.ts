@@ -19,6 +19,7 @@ import {
   type LightTheme,
   type DarkTheme,
   type FontFamily,
+  type SidebarMode,
 } from "../lib/appearance";
 
 let state: Appearance = { ...DEFAULTS };
@@ -74,6 +75,10 @@ function isDarkTheme(value: string): value is DarkTheme {
   return value === "carbon" || value === "ink" || value === "onyx";
 }
 
+function isSidebarMode(value: string): value is SidebarMode {
+  return value === "floating" || value === "fixed";
+}
+
 /**
  * Single source of truth for the UI: every change goes through here, so the
  * DOM is always redrawn from state rather than patched in place.
@@ -107,6 +112,13 @@ function render(): void {
   if (fontSelect instanceof HTMLSelectElement) {
     fontSelect.value = state.font;
   }
+
+  // sidebar 
+  document.querySelectorAll<HTMLElement>("[data-sidebar]").forEach((segment)=>{
+    const selected = segment.dataset.sidebar===state.sidebar;
+    segment.classList.toggle("is-selected", selected);
+    segment.setAttribute('aria-checked',String(selected));
+  })
 
   // Disable steppers at the limits (max and min values)
   setDisabled("font-size-down", state.fontSize <= FONT_SIZE_MIN);
@@ -207,6 +219,17 @@ function setupReset(): void {
   });
 }
 
+// sidebar function
+function setupSidebar():void{
+  document.querySelectorAll<HTMLElement>("[data-sidebar]").forEach((segment)=>{
+    segment.addEventListener("click",()=>{
+      const mode = segment.dataset.sidebar;
+      if(!mode || !isSidebarMode(mode)) return;
+      commit({sidebar:mode});
+    })
+  })
+}
+
 async function main(): Promise<void> {
   showVersion();
   setupTabs();
@@ -219,6 +242,7 @@ async function main(): Promise<void> {
   setupFont();
   setupSteppers();
   setupReset();
+  setupSidebar();
 }
 
 void main();
