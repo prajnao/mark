@@ -37,7 +37,30 @@
 
       <section class="tab-content-wrapper" data-panel="settings" role="tabpanel">
         <div class="tab-body tab-body--start">
-          <p class="placeholder">Settings go here.</p>
+          <div class="section-head">
+            <span class="section-title">Auto reload</span>
+            <span class="badge">Coming soon</span>
+          </div>
+      
+          <p class="section-note">Re-render the document when the file changes on disk.</p>
+      
+          <div class="setting-row is-disabled">
+            <span class="setting-label">Enable</span>
+            <label class="switch">
+              <input type="checkbox" id="auto-reload" disabled />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+      
+          <div class="setting-row is-disabled">
+            <span class="setting-label">Check every</span>
+            <select class="select" id="auto-reload-interval" disabled>
+              <option value="2">2 seconds</option>
+              <option value="5">5 seconds</option>
+              <option value="10">10 seconds</option>
+              <option value="30">30 seconds</option>
+            </select>
+          </div>
         </div>
       </section>
 
@@ -138,8 +161,10 @@
 
       <section class="tab-content-wrapper" data-panel="about" role="tabpanel" hidden>
         <div class="tab-body">
-          <div class="logo-wrapper">
-            <img class="logo" src="/full-logo.png" alt="Mark" />
+          <div class="logo-div-wrapper">
+           <div class="logo-wrapper"> <img class="logo" src="/full-logo.png" alt="Mark" />
+            <p id="version"></p>
+          </div>
             <p class="tagline">Markdown reader for the web</p>
           </div>
 
@@ -158,11 +183,21 @@
             </a>
           </div>
         </div>
+        <div class="support">
+          <p class="support-text">If Mark's been useful, a review really helps.</p>
+          <a class="support-cta" href="https://chromewebstore.google.com/detail/YOUR_EXTENSION_ID/reviews" target="_blank" rel="noopener">
+            Leave a review
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+            </svg>
+          </a>
+          <a class="support-secondary" href="https://github.com/prajnao/mark" target="_blank" rel="noopener">star it on GitHub</a>
+        </div>
 
-        <div class="footer">
+        <!-- <div class="footer">
           <p>Crafted by <a class="link" href="https://prajnaprabhu.com">prajna</a></p>
           <p id="version"></p>
-        </div>
+        </div> -->
       </section>
     </main>
 
