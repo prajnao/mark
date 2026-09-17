@@ -25,15 +25,29 @@ import {
   
     root.dataset.theme =
     resolved === "dark" ? appearance.darkTheme : appearance.lightTheme;
-  root.dataset.base = resolved;
-  // root.dataset.width = appearance.width;
+    root.dataset.base = resolved;
+
   if (appearance.width >= WIDTH_MAX) {
     root.dataset.width = "full";
   } else {
     delete root.dataset.width;
     root.style.setProperty("--measure", `${appearance.width}ch`);
   }
-  
+
+  if (root.dataset.sidebar !== appearance.sidebar) {
+    // Mode switches are a layout jump, not a state change the user is
+    // watching. Transitions here animate from the old mode's geometry,
+    // which reads as a glitch — suppress them for one frame.
+    root.classList.add("no-transition");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => root.classList.remove("no-transition"));
+    });
+  }
+
+  root.dataset.sidebar = appearance.sidebar;
+
+  root.dataset.sidebar=appearance.sidebar;
+
     root.style.setProperty("--font-body", FONT_STACKS[appearance.font]);
     root.style.setProperty("--reader-font-size", `${appearance.fontSize}px`);
     root.style.setProperty("--reader-line-height", String(appearance.spacing));

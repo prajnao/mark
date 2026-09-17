@@ -2,6 +2,7 @@ export type ThemeMode = "system" | "light" | "dark";
 export type LightTheme = "white" | "paper" | "dawn";
 export type DarkTheme = "carbon" | "ink" | "onyx";
 export type FontFamily = "sans" | "serif" | "mono";
+export type SidebarMode = "floating" | "fixed";
 
 export interface Appearance {
   mode: ThemeMode;
@@ -15,6 +16,7 @@ export interface Appearance {
   fontSize: number;
   spacing: number;
   width: number;
+  sidebar:SidebarMode;
 }
 
 export const APPEARANCE_KEY = "appearance";
@@ -27,6 +29,7 @@ export const DEFAULTS: Appearance = {
   fontSize: 16,
   spacing: 1.5,
   width: 70,
+  sidebar:"floating"
 };
 
 export const FONT_SIZE_MIN = 13;
