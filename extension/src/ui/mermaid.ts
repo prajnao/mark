@@ -72,3 +72,37 @@ export async function renderDiagrams(root: HTMLElement): Promise<void> {
     }
   }
 }
+
+
+/**
+ * Mermaid writes colours into the SVG rather than reading CSS variables,
+ * so a theme change means regenerating every diagram from its source.
+ */
+export async function reRenderDiagrams(): Promise<void> {
+  const containers = document.querySelectorAll<HTMLElement>(".mark-mermaid");
+  if (containers.length === 0) return;
+
+  // init() guards on `initialised`, so without resetting it the new theme
+  // never reaches mermaid.initialize and we re-render with the old colours.
+  initialised = false;
+  init();
+
+  let index = 0;
+
+  for (const container of containers) {
+    const source = container.dataset.source;
+    if (!source) continue;
+
+    const id = `mermaid-rerender-${Date.now()}-${index++}`;
+
+    try {
+      const { svg } = await mermaid.render(id, source);
+      container.className = "mark-mermaid";
+      container.innerHTML = svg;
+    } catch {
+      document.getElementById(id)?.remove();
+      document.getElementById(`d${id}`)?.remove();
+      // Leave whatever is currently rendered in place.
+    }
+  }
+}

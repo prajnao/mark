@@ -6,7 +6,8 @@
   "scripts": {
   "fonts": "node script/build-katex-fonts.mjs",
   "dev": "pnpm fonts && vite",
-  "build": "pnpm fonts && vite build"
+  "build": "pnpm fonts && vite build",
+  "package":"pnpm build && node script/zip.mjs"
 },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.7.1",

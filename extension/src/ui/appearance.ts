@@ -7,6 +7,7 @@ import {
     type Appearance,
     type FontFamily,
   } from "../lib/appearance";
+import { reRenderDiagrams } from "./mermaid";
   
   const FONT_STACKS: Record<FontFamily, string> = {
     sans: `ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif`,
@@ -22,10 +23,13 @@ import {
   export function applyAppearance(appearance: Appearance): void {
     const root = document.documentElement;
     const resolved = resolveMode(appearance.mode);
+    const baseChanged = root.dataset.base!=resolved;
   
     root.dataset.theme =
     resolved === "dark" ? appearance.darkTheme : appearance.lightTheme;
     root.dataset.base = resolved;
+
+    if (baseChanged) reRenderDiagrams();
 
   if (appearance.width >= WIDTH_MAX) {
     root.dataset.width = "full";
@@ -45,8 +49,6 @@ import {
   }
 
   root.dataset.sidebar = appearance.sidebar;
-
-  root.dataset.sidebar=appearance.sidebar;
 
     root.style.setProperty("--font-body", FONT_STACKS[appearance.font]);
     root.style.setProperty("--reader-font-size", `${appearance.fontSize}px`);
