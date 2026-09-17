@@ -20,7 +20,7 @@
  *   --selection       text selection
  */
 
- :root {
+:root {
   /* Structure — not part of the theme contract */
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -41,7 +41,6 @@
 
   --content-gutter: calc(var(--rail-w) + 24px);
 }
-
 
 /*
  * Derived tokens. These exist so a theme does not have to declare them,
@@ -383,7 +382,6 @@ body {
   padding: 20px 40px 20px var(--content-gutter);
 }
 
-
 /* Headings */
 #mark-content h1,
 #mark-content h2,
@@ -713,9 +711,56 @@ body.sidebar-collapsed #mark-toc-panel {
     visibility 0s 180ms;
 }
 
+/* fullscreen button styles  */
+#mark-fullscreen {
+  all: unset;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  cursor: pointer;
+  opacity: 0.8;
+  transition:
+    opacity 140ms ease,
+    color 180ms ease;
+}
+
+#mark-fullscreen:hover {
+  opacity: 1;
+  color: var(--fg);
+}
+
+#mark-fullscreen:focus-visible {
+  opacity: 1;
+  outline: 1.5px solid var(--brand);
+  outline-offset: 2px;
+}
+
+#mark-fullscreen .icon-exit,
+#mark-fullscreen.is-active .icon-enter {
+  display: none;
+}
+
+#mark-fullscreen.is-active .icon-exit {
+  display: block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mark-toc-bar,
   .mark-toc-link {
+    transition: none;
+  }
+
+  #mark-fullscreen {
     transition: none;
   }
 }

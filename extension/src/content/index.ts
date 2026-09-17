@@ -17,6 +17,7 @@ import {
   applyStoredAppearance,
   watchAppearanceChanges,
 } from "../ui/appearance.ts";
+import { buildFullScreenButton } from "../ui/fullscreen.ts";
 
 // const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
 // const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
@@ -121,6 +122,7 @@ function main(): void {
       addStyles();
 
       const content = buildView(html);
+      document.body.appendChild(buildFullScreenButton());
       enhanceCodeBlocks(content);
       void renderDiagrams(content);
       const headings = getHeadings(content);
