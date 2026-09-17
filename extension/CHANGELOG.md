@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 - September 17, 2026
+## 0.2.0 - September 17, 2026
 - Setup guide on install, so file access is easier to find
 - Six themes: White, Paper, Dawn, Carbon, Ink, and Onyx
 - Font, text size, and line spacing controls
