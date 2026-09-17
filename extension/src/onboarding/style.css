@@ -31,6 +31,7 @@
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.5;
+    /* min-height: 100vh; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -41,7 +42,7 @@
     align-items: center;
     justify-content: space-between;
     min-height: 100vh;
-    padding: 10px 0px;
+    padding: 12px 0px;
   }
   
   .full-logo {
@@ -158,6 +159,7 @@
     color: var(--fg-muted);
     font-size: 14px;
     text-align: center;
+    margin-top: 30px;
   }
   
   footer p {
@@ -183,3 +185,10 @@
       transition: none;
     }
   }
+
+
+
+
+
+
+
