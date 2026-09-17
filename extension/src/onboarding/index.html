@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Mark</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="wrapper">
+      <header>
+        <img class="full-logo" src="/full-logo.png" alt="Mark" />
+      </header>
+
+      <section class="content">
+       <div class="heading-section">
+        <p class="heading">Welcome aboard</p>
+
+        <p class="hint">Chrome blocks extensions from reading local files by default. Mark needs this on to open your <span class="quote">markdown</span>  files. It only reads files you open, and nothing leaves your browser.</p>
+       </div>
+
+        <ol class="steps">
+          <li class="step">
+            <button id="open-settings" class="cta" type="button">
+              Go to Manage Extension
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </button>
+          </li>
+
+          <li class="step">
+             <p class="step-text">Find this toggle and enable it</p>
+            <img
+              class="step-image"
+              src="/file-access.png"
+              alt="The Allow access to file URLs toggle in Chrome's extension settings"
+            />
+          </li>
+        </ol>
+
+        <p class="hint-2">This tab will close on toggle </p>
+
+        <div class="demo">
+          <video
+          cover="/logo.png"
+            src="/mark.mp4"
+            controls
+            playsinline
+            muted
+            loop
+            preload="metadata"
+            width="300"
+          ></video>
+          <p class="video-hint">A video demo of the setup</p>
+        </div>
+      </section>
+
+      <footer>
+        <p>
+          Please open an issue on
+          <a href="https://github.com/prajnao/mark">Github</a> for any questions
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

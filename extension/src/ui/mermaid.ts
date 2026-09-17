@@ -3,19 +3,18 @@ import mermaid from "mermaid";
 let initialised = false;
 
 // function currentTheme(): "default" | "dark" {
-//   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-//   return isDark ? "dark" : "default";
+//   const root = document.documentElement;
+
+//   if (root.classList.contains("theme-dark")) return "dark";
+//   if (root.classList.contains("theme-light")) return "default";
+
+//   return window.matchMedia("(prefers-color-scheme: dark)").matches
+//     ? "dark"
+//     : "default";
 // }
 
 function currentTheme(): "default" | "dark" {
-  const root = document.documentElement;
-
-  if (root.classList.contains("theme-dark")) return "dark";
-  if (root.classList.contains("theme-light")) return "default";
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "default";
+  return document.documentElement.dataset.base === "dark" ? "dark" : "default";
 }
 
 function init(): void {
@@ -45,6 +44,7 @@ export async function renderDiagrams(root: HTMLElement): Promise<void> {
 
     const container = document.createElement("div");
     container.className = "mark-mermaid";
+    container.dataset.source = source;
 
     try {
       const { svg } = await mermaid.render(id, source);

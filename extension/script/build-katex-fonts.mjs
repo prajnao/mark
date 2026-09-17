@@ -40,4 +40,4 @@ for (const font of FONTS) {
 mkdirSync(dirname(outFile), { recursive: true });
 writeFileSync(outFile, css);
 
-console.log(`KaTeX fonts: ${FONTS.length} files, ${Math.round(bytes / 1024)} KB`);
+// console.log(`KaTeX fonts: ${FONTS.length} files, ${Math.round(bytes / 1024)} KB`);

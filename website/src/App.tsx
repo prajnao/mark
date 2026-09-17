@@ -14,6 +14,8 @@ import {
   HardDriveIcon,
   ShieldIcon,
   GithubIcon,
+  FullScreenIcon,
+  LayoutAlignLeftIcon
 } from "@hugeicons/core-free-icons";
 
 import Changelog from "./components/changelog";
@@ -43,14 +45,25 @@ const FEATURES: Feature[] = [
       "A toc built from your headings, with click-to-jump and live position",
   },
   {
+    icon: <HugeiconsIcon icon={LayoutAlignLeftIcon} size={ICON_SIZE} />,
+    label: "Floating or fixed sidebar",
+    description: "Keep contents out of the way, or pinned beside the text",
+  },
+  {
+    icon: <HugeiconsIcon icon={FullScreenIcon} size={ICON_SIZE} />,
+    label: "Fullscreen",
+    description: "Hide the browser chrome and just read",
+  },
+  {
     icon: <HugeiconsIcon icon={Moon02Icon} size={ICON_SIZE} />,
-    label: "Themes",
-    description: "Light, dark, or follow your system",
+    label: "Six themes",
+    description:
+      "White, Paper, Dawn, Carbon, Ink, and Onyx or follow your system",
   },
   {
     icon: <HugeiconsIcon icon={TextFontIcon} size={ICON_SIZE} />,
-    label: "Typography",
-    description: "Measure, spacing, and rhythm tuned for long documents",
+    label: "Reading controls",
+    description: "Font, size, spacing, and column width, tuned to you",
   },
   {
     icon: <HugeiconsIcon icon={File01Icon} size={ICON_SIZE} />,
@@ -159,8 +172,7 @@ function App() {
 
         {(!isChangelog && !isPrivacy )  && (
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Mark is a simple, intuitive way to read Markdown files in your
-            browser.
+          Mark is a simple, intuitive way to read Markdown files as rich document right in your browser
           </p>
         )}
       </section>

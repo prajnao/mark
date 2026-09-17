@@ -49,7 +49,7 @@ export default function HowToUse(){
 
    <div className='grid grid-cols-1 gap-4'>
        {howToUseSteps.map((how)=>{
-        console.log(how,"How")
+        // console.log(how,"How")
        return <div key={how.id} className='flex items-center gap-2 text-sm'> 
             {/* no  */}
            {/* <span className='text-muted'>   {how.id}.</span> */}
@@ -128,7 +128,7 @@ const howToUseSteps=[
   {
     id:4,
     Icon:<HugeiconsIcon icon={InternetIcon} size={15} />,
-    text:"Set your choice of browser as default for markdown files, double click & Magic!",
+    text:"Set browser of choice as default for markdown files, double click & Magic!",
     link:""
   },
   
