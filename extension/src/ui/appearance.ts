@@ -50,8 +50,6 @@ import { reRenderDiagrams } from "./mermaid";
 
   root.dataset.sidebar = appearance.sidebar;
 
-  root.dataset.sidebar=appearance.sidebar;
-
     root.style.setProperty("--font-body", FONT_STACKS[appearance.font]);
     root.style.setProperty("--reader-font-size", `${appearance.fontSize}px`);
     root.style.setProperty("--reader-line-height", String(appearance.spacing));
