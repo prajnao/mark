@@ -195,7 +195,7 @@ function App() {
           <p>
             Crafted by{" "}
             <a
-              href="https://x.com/prjnap"
+              href="https://x.com/prjnafyi"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer text-muted transition-colors hover:text-strong"
