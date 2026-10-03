@@ -81,8 +81,8 @@ body {
   flex-direction: column;
   flex: 1;
   gap: 8px;
-  min-height: 400px;
-  max-height: 400px;
+  min-height: 460px;
+  max-height: 460px;
 }
 
 /* Tabs */
@@ -138,6 +138,9 @@ body {
   flex: 1;
   width: 100%;
   padding: 10px 8px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  
 }
 
 .tab-body {
@@ -213,9 +216,10 @@ body {
 }
 
 /* Theme swatches */
-
 .swatches {
   display: flex;
+  /* border: 1px solid red; */
+  overflow-x: scroll;
   gap: 6px;
 }
 
@@ -227,11 +231,17 @@ body {
 .swatch {
   all: unset;
   flex: 1;
-  box-sizing: border-box;
+  margin: 2px 2px;
+  width: fit-content;
+  max-width: 100px;
+  white-space: nowrap;      
+  /* overflow: hidden;          */
+  text-overflow: ellipsis;  
+  /* box-sizing: border-box; */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 4px;
+  padding: 8px 6px;
   border: 1.5px solid var(--swatch-border);
   border-radius: 6px;
   background: var(--swatch-bg);
@@ -414,8 +424,9 @@ body {
 }
 
 .reset-btn:hover {
-  background: var(--bg-hover);
-  color: var(--fg);
+  /* background: var(--bg-hover); */
+  /* color: var(--fg); */
+  opacity: 0.88;
 }
 
 .reset-btn:focus-visible {
@@ -681,4 +692,223 @@ color: var(--fg-muted);
   .switch-track::after {
     transition: none;
   }
+}
+
+.link-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  color: var(--fg-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.link-btn:hover {
+  color: var(--fg);
+}
+
+.link-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.view-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.icon-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--fg-muted);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: var(--fg);
+  /* background: var(--bg-hover); */
+  background:var(--surface)
+}
+
+.empty-state {
+  margin: 0;
+  padding: 16px 0;
+  color: var(--fg-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+#custom-theme-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-row {
+  display: flex;
+  align-items: center;
+  /* gap: 8px; */
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: var(--track);
+}
+
+.name-swatch-group{
+  display: flex;
+  place-items: center;
+  gap: 8px;
+}
+
+.theme-row-swatch {
+  /* flex: 0 0 auto; */
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  corner-shape: squircle;
+  border: 1px solid;
+}
+
+.theme-row-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theme-form {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+
+.text-input {
+  flex: 0 0 80px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  max-width: 100px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.text-input:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -1px;
+}
+
+.text-input.is-invalid {
+  border-color: var(--brand);
+}
+
+.color-input {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+ max-width: 130px;
+  align-items: center;
+  justify-content: flex-end;  
+}
+
+.text-input--hex {
+  flex: 0 0 110px;           
+  min-width: 0;
+  max-width: none;
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+
+
+.color-swatch {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius:6px;
+  /* corner-shape:squircle; */
+  background: none;
+  cursor: pointer;
+  margin-top: -2px;
+}
+
+/* Chrome draws its own padded box inside a colour input. */
+.color-swatch::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+.color-swatch::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.text-input--hex {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+
+.form-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.form-actions .reset-btn,
+.form-actions .ghost-btn {
+  flex: 1;
+  margin-top: 0;
+}
+
+.ghost-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ghost-btn:hover {
+  color: var(--fg);
+  background: var(--bg-hover);
+}
+
+.theme-row-actions {
+  display: flex;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.icon-btn--danger:hover {
+  color: #e5484d;
+  background: color-mix(in srgb, #e5484d 12%, transparent);
 }
