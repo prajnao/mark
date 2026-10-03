@@ -15,7 +15,8 @@ import {
   ShieldIcon,
   GithubIcon,
   FullScreenIcon,
-  LayoutAlignLeftIcon
+  LayoutAlignLeftIcon,
+  PaintBoardIcon
 } from "@hugeicons/core-free-icons";
 
 import Changelog from "./components/changelog";
@@ -36,7 +37,7 @@ const FEATURES: Feature[] = [
   {
     icon: <HugeiconsIcon icon={MousePointerClickIcon} size={ICON_SIZE} />,
     label: "Double-click to read",
-    description: "Open any local .md file straight in your browser",
+    description: "Open any local markdown file straight in your browser",
   },
   {
     icon: <HugeiconsIcon icon={TableOfContentsIcon} size={ICON_SIZE} />,
@@ -59,6 +60,11 @@ const FEATURES: Feature[] = [
     label: "Six themes",
     description:
       "White, Paper, Dawn, Carbon, Ink, and Onyx or follow your system",
+  },
+  {
+    icon: <HugeiconsIcon icon={PaintBoardIcon} size={ICON_SIZE} />,
+    label: "Custom themes",
+    description: "Build your own from twelve colours and save as many as you like",
   },
   {
     icon: <HugeiconsIcon icon={TextFontIcon} size={ICON_SIZE} />,

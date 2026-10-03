@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 - October 3, 2026
+- Supports related markdown file formats alongside .md
+- Add custom theme of choice and use it.
+
+
 ## 0.2.0 - September 17, 2026
 - Setup guide on install, so file access is easier to find
 - Six themes: White, Paper, Dawn, Carbon, Ink, and Onyx
