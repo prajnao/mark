@@ -40,21 +40,8 @@ function addStyles(): void {
   document.head.appendChild(style);
 }
 
-let hideStyle: HTMLStyleElement | null = null;
-
-function hideBody(): void {
-  hideStyle = document.createElement("style");
-  hideStyle.textContent = "body{display:none !important;}";
-  document.documentElement.appendChild(hideStyle);
-}
-
-// hideBody();
-
-// setInterval(reveal, 1000);
-
 function reveal(): void {
-  hideStyle?.remove();
-  hideStyle = null;
+  document.documentElement.classList.add("mark-ready");
 }
 
 function onReady(callback: () => void): void {
@@ -98,14 +85,8 @@ function buildView(html: string): HTMLElement {
 }
 
 function main(): void {
-  hideBody();
-  setTimeout(reveal, 2000);
-
   onReady(async () => {
     try {
-      // await applyStoredTheme();
-      // watchThemeChanges();
-      // earlier just theme is now replaced by appearance
       await applyStoredAppearance();
       watchAppearanceChanges();
       

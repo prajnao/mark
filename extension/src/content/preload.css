@@ -1,0 +1,16 @@
+/*
+ * Chrome paints local Markdown files as plain text before the content script
+ * has loaded. This stylesheet is injected by the manifest at document_start,
+ * so the browser's raw view never reaches the screen.
+ */
+html:not(.mark-ready) body {
+  visibility: hidden;
+  animation: mark-preload-failsafe 0s 10s forwards;
+}
+
+/* If the renderer never starts, fall back to Chrome's readable raw view. */
+@keyframes mark-preload-failsafe {
+  to {
+    visibility: visible;
+  }
+}

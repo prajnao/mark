@@ -11,6 +11,7 @@
   },
   "content_scripts": [
     {
+      "css": ["src/content/preload.css"],
       "js": ["src/content/index.ts"],
       "matches": [
         "file:///*.md",
