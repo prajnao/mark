@@ -126,10 +126,12 @@ function Features() {
 
       <div className="grid grid-cols-1 gap-4">
         {FEATURES.map((feature) => (
-          <div key={feature.label} className="flex items-center gap-2 text-sm">
-            <span className="shrink-0 text-muted">{feature.icon}</span>
+          <div key={feature.label} className="flex items-start gap-2 text-sm">
+            <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted">
+              {feature.icon}
+            </span>
 
-            <p className="text-sm">
+            <p className="min-w-0 text-sm leading-5">
               <span className="text-strong">{feature.label}</span>
               <span className="text-muted"> - {feature.description}</span>
             </p>
@@ -201,7 +203,7 @@ function App() {
           <p>
             Crafted by{" "}
             <a
-              href="https://x.com/prjnafyi"
+              href="https://x.com/prajnafyi"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer text-muted transition-colors hover:text-strong"

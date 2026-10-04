@@ -47,52 +47,40 @@ export default function HowToUse(){
        ))}
       </div> */}
 
-   <div className='grid grid-cols-1 gap-4'>
-       {howToUseSteps.map((how)=>{
-        // console.log(how,"How")
-       return <div key={how.id} className='flex items-center gap-2 text-sm'> 
-            {/* no  */}
-           {/* <span className='text-muted'>   {how.id}.</span> */}
-            {/* <div className='bg-elevated size-5.5 rounded-[6px] flex justify-center items-center'>
-              {how.Icon}
-            </div> */}
-                <span className="shrink-0 text-muted">
+      <div className="grid grid-cols-1 gap-4">
+        {howToUseSteps.map((how) => (
+          <div key={how.id} className="flex items-start gap-2 text-sm">
+            <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted">
               {how.Icon}
             </span>
 
-            {how.link ? 
-            <a href={how.link} target='_blank' className='cursor-pointer flex items-center  underline underline-offset-4 text-muted hover:text-strong transition-colors decoration-muted/40'>
-              {how.text}
+            <p className="min-w-0 text-sm leading-5">
+              {how.link ? (
+                <a
+                  href={how.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cursor-pointer text-muted underline decoration-muted/40 underline-offset-4 transition-colors hover:text-strong"
+                >
+                  {how.text}
+                </a>
+              ) : (
+                <span>{how.text}</span>
+              )}
 
-              {how.highlightTexts &&
-              <span className='flex items-center gap-x-1.5 ml-1 text-sm'>
-               {how?.highlightTexts?.map((highlight:string)=> (
-           <span className='bg-elevated rounded px-0 text-sm'>   {highlight},</span>
-
-       
-       ))}
-       </span>
-       }
-            </a>  
-            :   <p className='flex items-center text-sm'> <span>
-              {how.text}
-            </span>
-                  
-            {how.highlightTexts &&
-              <span className='flex items-center gap-x-1.5 ml-1 text-sm'>
-               {how?.highlightTexts?.map((highlight,index)=> (
-           <span className='bg-elevated rounded px-1.5 text-sm'>   {highlight}{index!==how.highlightTexts.length-1 && ","}</span>
-
-       
-       ))}
-       </span>
-       }
+              {how.highlightTexts?.map((highlight, index) => (
+                <span key={highlight}>
+                  {" "}
+                  <span className="box-decoration-clone rounded bg-elevated px-1.5 py-0.5 text-sm">
+                    {highlight}
+                    {index !== how.highlightTexts.length - 1 && ","}
+                  </span>
+                </span>
+              ))}
             </p>
-          }
-
           </div>
-})}
-   </div>
+        ))}
+      </div>
 
     </section>
     )
@@ -126,7 +114,7 @@ const howToUseSteps=[
     link:""
   },
   {
-    id:4,
+    id:5,
     Icon:<HugeiconsIcon icon={InternetIcon} size={15} />,
     text:"Set browser of choice as default for markdown files, double click & Magic!",
     link:""
@@ -557,8 +545,6 @@ export function DiaIcon({
     </svg>
   );
 }
-
-
 
 
 
