@@ -40,21 +40,13 @@ function addStyles(): void {
   document.head.appendChild(style);
 }
 
-let hideStyle: HTMLStyleElement | null = null;
-
-function hideBody(): void {
-  hideStyle = document.createElement("style");
-  hideStyle.textContent = "body{display:none !important;}";
-  document.documentElement.appendChild(hideStyle);
-}
-
-// hideBody();
-
-// setInterval(reveal, 1000);
-
 function reveal(): void {
-  hideStyle?.remove();
-  hideStyle = null;
+  const root = document.documentElement;
+  root.classList.add("mark-revealing", "mark-ready");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => root.classList.remove("mark-revealing"));
+  });
 }
 
 function onReady(callback: () => void): void {
@@ -98,14 +90,8 @@ function buildView(html: string): HTMLElement {
 }
 
 function main(): void {
-  hideBody();
-  setTimeout(reveal, 2000);
-
   onReady(async () => {
     try {
-      // await applyStoredTheme();
-      // watchThemeChanges();
-      // earlier just theme is now replaced by appearance
       await applyStoredAppearance();
       watchAppearanceChanges();
       
@@ -135,7 +121,7 @@ function main(): void {
         trackActiveHeading(headings);
       }
 
-      void applyStoredCollapse();
+      await applyStoredCollapse();
     } catch (error) {
       console.error("[md-viewer]", error);
     } finally {

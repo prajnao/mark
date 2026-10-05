@@ -803,7 +803,13 @@ scroll-padding-top: 44px;
 
 :root.no-transition #mark-sidebar,
 :root.no-transition #mark-main,
-:root.no-transition #mark-toc-panel {
+:root.no-transition #mark-toc-panel,
+:root.mark-revealing #mark-sidebar,
+:root.mark-revealing #mark-main,
+:root.mark-revealing #mark-toc-panel,
+:root:not(.mark-ready) #mark-sidebar,
+:root:not(.mark-ready) #mark-main,
+:root:not(.mark-ready) #mark-toc-panel {
   transition: none !important;
 }
 
