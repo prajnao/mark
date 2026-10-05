@@ -41,7 +41,12 @@ function addStyles(): void {
 }
 
 function reveal(): void {
-  document.documentElement.classList.add("mark-ready");
+  const root = document.documentElement;
+  root.classList.add("mark-revealing", "mark-ready");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => root.classList.remove("mark-revealing"));
+  });
 }
 
 function onReady(callback: () => void): void {
@@ -116,7 +121,7 @@ function main(): void {
         trackActiveHeading(headings);
       }
 
-      void applyStoredCollapse();
+      await applyStoredCollapse();
     } catch (error) {
       console.error("[md-viewer]", error);
     } finally {
