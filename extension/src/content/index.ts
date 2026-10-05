@@ -9,19 +9,15 @@ import {
   trackActiveHeading,
 } from "../ui/sidebar";
 import { enhanceCodeBlocks } from "../ui/code-block.ts";
-// import katexStyles from "katex/dist/katex.min.css?inline";
 import katexBase from "katex/dist/katex.min.css?inline";
 import katexFonts from "../styles/katex-fonts.css?inline";
 import { renderDiagrams } from "../ui/mermaid.ts";
-// import { applyStoredTheme, watchThemeChanges } from "../ui/theme.ts";
 import {
   applyStoredAppearance,
   watchAppearanceChanges,
 } from "../ui/appearance.ts";
 import { buildFullScreenButton } from "../ui/fullscreen.ts";
 
-// const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "");
-// const katexCss = katexBase.replace(/@font-face\s*\{[^}]*\}/g, "") + katexFonts;
 const katexCss = katexBase + katexFonts;
 
 // console.log("My Markdown preview extension is running, gg!");

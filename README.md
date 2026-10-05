@@ -26,6 +26,7 @@ Double-click a `.md` file and read it like a document, not source code.
 **Appearance**
 
 - Six themes — White, Paper, and Dawn for light; Carbon, Ink, and Onyx for dark
+- Custom themes — build your own from twelve tokens, save as many as you like
 - Follows your system theme, remembering a preset for each mode
 - Font, text size, and line spacing controls
 - Adjustable content width, from a narrow column to full screen
@@ -80,10 +81,7 @@ Firefox and Safari support is planned.
 pnpm install
 pnpm dev      # build and watch
 pnpm build    # production build
+pnpm package  # production build, zipped into releases/
 ```
 
 Load the unpacked extension from `extension/dist` at `chrome://extensions` with Developer mode on.
-
-Note that unpacked installs get file access by default, while Web Store
-installs do not. To test anything related to file permissions, turn the
-setting off first.
