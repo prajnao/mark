@@ -175,9 +175,10 @@ export function buildSidebarToggle(): HTMLButtonElement {
 export async function applyStoredCollapse(): Promise<void> {
   try {
     const stored = await chrome.storage.local.get(COLLAPSE_KEY);
-    if (stored[COLLAPSE_KEY]) {
-      document.body.classList.add("sidebar-collapsed");
-    }
+    document.body.classList.toggle(
+      "sidebar-collapsed",
+      Boolean(stored[COLLAPSE_KEY]),
+    );
   } catch {
     // The default state stays.
   }

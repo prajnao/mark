@@ -1,24 +1,30 @@
 {
   "name": "Mark",
   "description": "Mark is a simple, intuitive way to read Markdown files as rich document right in your browser",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "manifest_version": 3,
-  "icons":{
-    "16":"icons/icon-16.png",
-    "32":"icons/icon-32.png",
-    "48":"icons/icon-48.png",
-    "128":"icons/icon-128.png"
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "content_scripts": [
     {
+      "css": ["src/content/preload.css"],
       "js": ["src/content/index.ts"],
-      "matches": ["file:///*.md"],
+      "matches": [
+        "file:///*.md",
+        "file:///*.MD",
+        "file:///*.markdown",
+        "file:///*.MARKDOWN"
+      ],
       "run_at": "document_start"
     }
   ],
-  "background":{
-    "service_worker":"src/background/index.ts",
-    "type":"module"
+  "background": {
+    "service_worker": "src/background/index.ts",
+    "type": "module"
   },
   "action": {
     "default_popup": "src/popup/index.html",
@@ -26,10 +32,9 @@
   },
   "permissions": ["storage"],
   "web_accessible_resources": [
-  {
-    "resources": ["icons/icon-32.png"],
-    "matches": ["file:///*"]
-  }
-]
+    {
+      "resources": ["icons/icon-32.png"],
+      "matches": ["file:///*"]
+    }
+  ]
 }
-
